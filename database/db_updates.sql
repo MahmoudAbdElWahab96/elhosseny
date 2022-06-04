@@ -1,0 +1,1 @@
+INSERT INTO `rose_config_meta` (`id`, `feature_id`, `feature_value`, `value1`, `value2`, `ins`, `created_at`, `updated_at`) VALUES (NULL, '21', '1', 'cost_center_account_level', '4', '1', current_timestamp(), current_timestamp());
