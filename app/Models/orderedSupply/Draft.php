@@ -4,12 +4,13 @@ namespace App\Models\orderedSupply;
 
 use App\Models\orderedSupply\Traits\DraftRelationship;
 use App\Models\ModelTrait;
+use App\Models\orderedSupply\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 
 
 class Draft extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         DraftRelationship {
     }
 

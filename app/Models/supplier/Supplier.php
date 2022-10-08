@@ -3,13 +3,14 @@
 namespace App\Models\supplier;
 
 use App\Models\ModelTrait;
+use App\Models\supplier\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\supplier\Traits\SupplierAttribute;
 use App\Models\supplier\Traits\SupplierRelationship;
 
 class Supplier extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         SupplierAttribute,
     	SupplierRelationship {
             // SupplierAttribute::getEditButtonAttribute insteadof ModelTrait;

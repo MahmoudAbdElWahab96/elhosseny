@@ -28,6 +28,7 @@ use App\Repositories\Focus\general\CompanyRepository;
 use App\Http\Responses\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Focus\general\ManageCompanyRequest;
+use App\Http\Requests\Request;
 use App\Models\Company\Company;
 use App\Http\Responses\ViewResponse;
 use Illuminate\Support\Facades\App;
@@ -54,6 +55,8 @@ class CompanyController extends Controller
 
     public function manage(ManageCompanyRequest $request)
     {
+        $companies = Company::all();
+
         $company = Company::where('id', '=', auth()->user()->ins)->first();
 
 
@@ -75,13 +78,36 @@ class CompanyController extends Controller
 
         $fields_data = custom_fields($fields_raw);
 
-
-
-
-        return  view('focus.general.company', compact('company', 'fields_data'));
+        return  view('focus.general.company', compact('company', 'fields_data', 'companies'));
     }
 
-    public function update(ManageCompanyRequest $request)
+    public function edit($id){
+        $companies = Company::all();
+
+        $company = Company::where('id',$id)->first();
+
+        $fields = Customfield::where('module_id', '=', 6)->get()->groupBy('field_type');
+        $fields_raw = array();
+
+        if (isset($fields['text'])) {
+            foreach ($fields['text'] as $row) {
+                $data = CustomEntry::where('custom_field_id', '=', $row['id'])->where('module', '=', 6)->where('rid', '=', $company->id)->first();
+                $fields_raw['text'][] = array('id' => $row['id'], 'name' => $row['name'], 'default_data' => $data['data']);
+            }
+        }
+        if (isset($fields['number'])) {
+            foreach ($fields['number'] as $row) {
+                $data = CustomEntry::where('custom_field_id', '=', $row['id'])->where('module', '=', 6)->where('rid', '=', $company->id)->first();
+                $fields_raw['number'][] = array('id' => $row['id'], 'name' => $row['name'], 'default_data' => $data['data']);
+            }
+        }
+
+        $fields_data = custom_fields($fields_raw);
+
+        return  view('focus.general.edit_company', compact('company', 'fields_data', 'companies'));
+    }
+
+    public function update(ManageCompanyRequest $request, $id)
     {
         $data = $request->only(['cname', 'address', 'city', 'region', 'country', 'postbox', 'taxid', 'logo', 'theme_logo', 'icon', 'phone', 'email']);
         $data2 = $request->only(['custom_field']);
@@ -102,7 +128,37 @@ class CompanyController extends Controller
             ]);
 
         }
-        $result = $this->repository->update(compact('data', 'data2'));
+        $result = $this->repository->update(compact('data', 'data2', 'id'));
+
+        return new RedirectResponse(route('biller.business.settings'), ['flash_success' => trans('business.updated')]);
+    }
+
+    public function delete($id){
+        $id;
+    }
+
+    public function addCompany(ManageCompanyRequest $request)
+    {
+        $data = $request->only(['cname', 'address', 'city', 'region', 'country', 'postbox', 'taxid', 'logo', 'theme_logo', 'icon', 'phone', 'email']);
+        $data2 = $request->only(['custom_field']);
+
+        if (!empty($data['logo'])) {
+            $request->validate([
+                'logo' => 'mimes:jpeg,png|dimensions:max_width=500,max_height=500',
+            ]);
+        }
+        if (!empty($data['theme_logo'])) {
+            $request->validate([
+                'theme_logo' => 'mimes:jpeg,png|dimensions:max_width=200,max_height=200',
+            ]);
+        }
+        if (!empty($data['icon'])) {
+            $request->validate([
+                'icon' => 'mimes:ico|dimensions:max_width=100,max_height=100',
+            ]);
+
+        }
+        $result = $this->repository->create(compact('data', 'data2'));
 
         return new RedirectResponse(route('biller.business.settings'), ['flash_success' => trans('business.updated')]);
     }

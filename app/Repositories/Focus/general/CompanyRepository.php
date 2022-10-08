@@ -62,7 +62,42 @@ class CompanyRepository extends BaseRepository
             $input['theme_logo'] = $this->uploadPicture($input['theme_logo'], $this->file_header_path);
         }
         $input = array_map( 'strip_tags', $input);
-        $company = Company::where('id', auth()->user()->ins)->update($input);
+        $company = Company::where('id', $data['id'])->update($input);
+
+           if (@$company) {
+                $fields = array();
+                $ids=array();
+                if (isset($data['data2']['custom_field'])) {
+
+                    foreach ($data['data2']['custom_field'] as $key => $value) {
+                        $ids[]=$key;
+                        $fields[] = array('custom_field_id' => $key, 'rid' => auth()->user()->ins, 'module' => 6, 'data' => strip_tags($value), 'ins' =>auth()->user()->ins);
+                    }
+                    CustomEntry::whereIn('custom_field_id', $ids)->where('rid', '=', auth()->user()->ins)->delete();
+                    CustomEntry::insert($fields);
+                }
+            }
+
+        return $company;
+
+        throw new GeneralException(trans('exceptions.backend.hrms.update_error'));
+    }
+
+    public function create(array $data)
+    {
+        $input = $data['data'];
+        if (!empty($input['logo'])) {
+            $input['logo'] = $this->uploadPicture($input['logo'], $this->file_picture_path);
+        }
+        if (!empty($input['icon'])) {
+            $input['icon'] = $this->uploadPicture($input['icon'], $this->file_icon_path);
+        }
+
+        if (!empty($input['theme_logo'])) {
+            $input['theme_logo'] = $this->uploadPicture($input['theme_logo'], $this->file_header_path);
+        }
+        $input = array_map( 'strip_tags', $input);
+        $company = Company::create($input);
 
            if (@$company) {
                 $fields = array();

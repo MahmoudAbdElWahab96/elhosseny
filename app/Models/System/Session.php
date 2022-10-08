@@ -3,6 +3,7 @@
 namespace App\Models\System;
 
 use App\Models\BaseModel;
+use App\Models\System\Traits\BelongsToBranch;
 
 /**
  * Class Session
@@ -10,6 +11,7 @@ use App\Models\BaseModel;
  */
 class Session extends BaseModel
 {
+    use BelongsToBranch;
     /**
      * The database table used by the model.
      *

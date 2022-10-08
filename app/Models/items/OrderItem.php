@@ -3,11 +3,12 @@
 namespace App\Models\items;
 
 use App\Models\items\Traits\OrderItemRelationship;
+use App\Models\items\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 
 class OrderItem extends Model
 {
-         use OrderItemRelationship {
+         use BelongsToBranch,OrderItemRelationship {
             // CustomfieldAttribute::getEditButtonAttribute insteadof ModelTrait;
         }
       protected $table = 'order_items';

@@ -3,13 +3,14 @@
 namespace App\Models\unit;
 
 use App\Models\ModelTrait;
+use App\Models\unit\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\unit\Traits\UnitAttribute;
 use App\Models\unit\Traits\UnitRelationship;
 
 class Unit extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         UnitAttribute,
         UnitRelationship {
             // BankAttribute::getEditButtonAttribute insteadof ModelTrait;

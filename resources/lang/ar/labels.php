@@ -18,6 +18,12 @@ return [
         'toggle_navigation' => 'تبديل التنقل',
     ],
     'backend' => [
+        'branches' => [
+            'view' => 'عرض الفروع',
+            'management' => 'اداره الفروع',
+            'create' => 'انشاء',
+            'edit' => 'تعديل'
+        ],
         'openingBalance' => [
             'create' => 'انشاء ارصده افتتاحيه'
         ],

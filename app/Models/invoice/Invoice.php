@@ -6,10 +6,11 @@ use App\Models\ModelTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\invoice\Traits\InvoiceAttribute;
 use App\Models\invoice\Traits\InvoiceRelationship;
+use App\Models\invoice\Traits\BelongsToBranch;
 
 class Invoice extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         InvoiceAttribute,
         InvoiceRelationship {
     }

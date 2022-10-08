@@ -2,10 +2,13 @@
 
 namespace App\Models\items;
 
+use App\Models\items\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 
 class Prefix extends Model
 {
+    use BelongsToBranch;
+
     protected $table = 'prefixes';
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Models\country;
 
+use App\Models\country\Traits\BelongsToBranch;
 use App\Models\ModelTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\country\Traits\CountryAttribute;
@@ -9,7 +10,7 @@ use App\Models\country\Traits\CountryRelationship;
 
 class Country extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         CountryAttribute,
         CountryRelationship {
         // BankAttribute::getEditButtonAttribute insteadof ModelTrait;

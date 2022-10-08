@@ -2,6 +2,7 @@
 
 /* valid */
 function selectCustomer(data) {
+    alert('vf');
     $('#customer_id').val(data.id);
     $('#custom_discount').val(data.discount_c);
     $('#customer_name').html('<strong>' + data.name + '</strong>');
@@ -122,7 +123,6 @@ function farmCheck(form_name = false) {
 }
 
 $(document).ready(function () {
-
     $("#customer-box").keyup(function () {
         $.ajaxSetup({
             headers: {

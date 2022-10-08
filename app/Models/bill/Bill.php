@@ -2,6 +2,7 @@
 
 namespace App\Models\bill;
 
+use App\Models\bill\Traits\BelongsToBranch;
 use App\Models\ModelTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\bill\Traits\BillAttribute;
@@ -9,7 +10,7 @@ use App\Models\bill\Traits\BillRelationship;
 
 class Bill extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         BillAttribute,
         BillRelationship {
         // InvoiceAttribute::getEditButtonAttribute insteadof ModelTrait;

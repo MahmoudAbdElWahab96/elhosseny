@@ -3,13 +3,14 @@
 namespace App\Models\productvariable;
 
 use App\Models\ModelTrait;
+use App\Models\productvariable\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\productvariable\Traits\ProductvariableAttribute;
 use App\Models\productvariable\Traits\ProductvariableRelationship;
 
 class Productvariable extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         ProductvariableAttribute,
     	ProductvariableRelationship {
             // ProductvariableAttribute::getEditButtonAttribute insteadof ModelTrait;

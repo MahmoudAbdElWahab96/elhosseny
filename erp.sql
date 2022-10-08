@@ -108,3 +108,123 @@ ALTER TABLE `rose_product_variables` ADD `name_en` VARCHAR(256) NULL AFTER `name
 ALTER TABLE `rose_additionals` ADD `tax_id` INT(11) NULL AFTER `id`, ADD `code` VARCHAR(256) NULL AFTER `tax_id`, ADD `name_en` VARCHAR(256) NULL AFTER `code`;
 
 ALTER TABLE `rose_invoices` ADD `sub_tax_id` INT(11) NULL AFTER `tax_id`;
+
+
+
+
+
+
+
+########################################################################################
+
+
+
+CREATE TABLE `rose_branches` ( `id` INT NOT NULL AUTO_INCREMENT , `company_id` INT NOT NULL , `name` CHAR(50) NOT NULL , `country` VARCHAR NOT NULL , `region` VARCHAR NOT NULL , `city` VARCHAR NOT NULL , `postbox` VARCHAR NOT NULL , `phone` VARCHAR NOT NULL , `email` VARCHAR NOT NULL , `created_at` TIMESTAMP NULL , `updated_at` TIMESTAMP NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `rose_company_branches` ( `id` INT NOT NULL AUTO_INCREMENT , `company_id` INT(11) NOT NULL , `branch_id` INT(11) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+
+ALTER TABLE `rose_accounts` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_account_screen` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_activities` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_additionals` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_attendances` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_banks` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_channel` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_channel_bill` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_config_meta` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_cost_centers` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_countries` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_currencies` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_customers` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_customer_groups` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_customer_group_entries` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_custom_entries` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_custom_fields` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_departments` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_drafts` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_draft_items` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_email_settings` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_events` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_event_relations` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_global_settings` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_goals` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_history` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_history_types` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_hrm_metas` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_invoices` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_invoice_items` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_menus` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_messages` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_meta_entries` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_miscs` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_notes` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_notifications` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_oauth_access_tokens` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_oauth_auth_codes` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_oauth_clients` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_oauth_personal_access_clients` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_oauth_refresh_tokens` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_opening_balances` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_ordered_supply` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_ordered_supply_items` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_orders` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_order_items` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_pages` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_participants` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_password_resets` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_permissions` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_permission_role` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_permission_user` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_prefixes` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_products` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_product_categories` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_product_contains` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_product_meta` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_product_variables` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_projects` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_project_logs` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_project_meta` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_project_milestones` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_project_relations` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_purchase_orders` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_purchase_order_items` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_quotes` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_quote_items` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_registers` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_roles` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_role_user` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_screens` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_sessions` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_settings_required_fields` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_sms_settings` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_sub_taxes` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_suppliers` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_taxes` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_templates` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_terms` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_threads` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_todolists` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_todolist_relations` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_transactions` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_transaction_categories` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_transaction_history` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_units` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_users` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_user_gateways` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_user_gateway_entries` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_user_profiles` ADD `branch_id` INT(11) NULL AFTER `id`;
+ALTER TABLE `rose_warehouses` ADD `branch_id` INT(11) NULL AFTER `id`;
+
+
+CREATE TABLE `rose_users_branches` ( `id` INT NOT NULL AUTO_INCREMENT , `user_id` INT(11) NOT NULL , `branch_id` INT(11) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+ALTER TABLE `rose_branches` ADD `is_active` TINYINT NOT NULL DEFAULT '0' AFTER `id`;
+
+
+
+ALTER TABLE `rose_branches` CHANGE `country` `country` VARCHAR(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL, CHANGE `region` `region` VARCHAR(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL, CHANGE `city` `city` VARCHAR(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL, CHANGE `postbox` `postbox` VARCHAR(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL, CHANGE `phone` `phone` VARCHAR(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL, CHANGE `email` `email` VARCHAR(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL;
+
+
+
+
+ALTER TABLE `rose_prefixes` DROP `branch_id`;

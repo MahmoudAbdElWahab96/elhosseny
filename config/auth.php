@@ -40,12 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-
-          'crm'  => [
+        'crm'  => [
           'driver'  => 'session',
           'provider' => 'crm',
         ],
-
         'api' => [
             'driver' => 'token',
             'provider' => 'users',

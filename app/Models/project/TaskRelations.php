@@ -2,10 +2,13 @@
 
 namespace App\Models\project;
 
+use App\Models\project\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 
 class TaskRelations extends Model
 {
+    use BelongsToBranch;
+
     protected $table = 'todolist_relations';
 
     /**

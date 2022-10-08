@@ -2,13 +2,14 @@
 
 namespace App\Models\hrm;
 
+use App\Models\hrm\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ModelTrait;
 use App\Models\hrm\Traits\HrmMetaAttribute;
 
 class HrmMeta extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         HrmMetaAttribute {
 
     }

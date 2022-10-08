@@ -8,10 +8,11 @@ use App\Models\costCenter\Traits\CostCenterAttribute;
 use App\Models\costCenter\Traits\CostCenterRelationship;
 use App\Models\screen\Screen;
 use App\Models\account\Account;
+use App\Models\costCenter\Traits\BelongsToBranch;
 
 class CostCenter extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         CostCenterAttribute,
         CostCenterRelationship {
         // BankAttribute::getEditButtonAttribute insteadof ModelTrait;

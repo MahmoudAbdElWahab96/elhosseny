@@ -2,10 +2,12 @@
 
 namespace App\Models\Company;
 
+use App\Models\Company\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 
 class Goal extends Model
 {
+    use BelongsToBranch;
 
       protected $table = 'goals';
 

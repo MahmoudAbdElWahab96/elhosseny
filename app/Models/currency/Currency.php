@@ -2,6 +2,7 @@
 
 namespace App\Models\currency;
 
+use App\Models\currency\Traits\BelongsToBranch;
 use App\Models\ModelTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\currency\Traits\CurrencyAttribute;

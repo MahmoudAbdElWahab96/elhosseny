@@ -4,13 +4,14 @@ namespace App\Models\tax;
 
 use App\Models\additional\Additional;
 use App\Models\ModelTrait;
+use App\Models\tax\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\tax\Traits\TaxAttribute;
 use App\Models\tax\Traits\TaxRelationship;
 
 class Tax extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         TaxAttribute,
     	TaxRelationship {
             // BankAttribute::getEditButtonAttribute insteadof ModelTrait;

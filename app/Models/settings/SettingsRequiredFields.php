@@ -2,11 +2,12 @@
 
 namespace App\Models\settings;
 
+use App\Models\settings\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 
 class SettingsRequiredFields extends Model
 {
-
+    use BelongsToBranch;
     /**
      * The database table used by the model.
      * @var string

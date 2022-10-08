@@ -5,7 +5,7 @@ namespace App\Models\Company;
 use App\Models\ModelTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Company\Traits\ConfigMetaRelationship;
-
+use App\Models\Company\Traits\BelongsToBranch;
 
 class ConfigMeta extends Model
 {

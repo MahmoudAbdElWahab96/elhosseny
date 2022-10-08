@@ -6,10 +6,11 @@ use App\Models\ModelTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\additional\Traits\AdditionalAttribute;
 use App\Models\additional\Traits\AdditionalRelationship;
+use App\Models\additional\Traits\BelongsToBranch;
 
 class Additional extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         AdditionalAttribute,
     	AdditionalRelationship {
             // AdditionalAttribute::getEditButtonAttribute insteadof ModelTrait;

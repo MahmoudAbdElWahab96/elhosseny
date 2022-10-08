@@ -4,11 +4,12 @@ namespace App\Models\items;
 
 use App\Models\items\Traits\DraftItemRelationship;
 use App\Models\items\Traits\InvoiceItemRelationship;
+use App\Models\items\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 
 class DraftItem extends Model
 {
-     use DraftItemRelationship {
+     use BelongsToBranch,DraftItemRelationship {
             // CustomfieldAttribute::getEditButtonAttribute insteadof ModelTrait;
         }
     protected $table = 'draft_items';

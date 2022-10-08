@@ -31,6 +31,7 @@ use App\Http\Requests\Focus\customer\EditCustomerRequest;
 use App\Http\Requests\Focus\customer\DeleteCustomerRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 /**
  * CustomersController
@@ -103,7 +104,7 @@ class CustomersController extends Controller
             ]);
         }
         if (empty($data['email'])) {
-            $data['email']='no_email_'.Str::random(4).'@'.Str::random(4);
+            $data['email']='no_email_'. Str::random(4).'@'.Str::random(4);
             $data['email']=strtolower($data['email']);
         }
         if (empty($data['phone'])) {
@@ -299,10 +300,12 @@ class CustomersController extends Controller
 
     public function search(Request $request)
     {
-        if (!access()->allow('crm')) return false;
+        if (!access()->allow('crm')){
+            return false;
+        }
         $q = $request->post('keyword');
         $user = \App\Models\customer\Customer::with('primary_group')
-        ->where('active', '=', 0)
+        ->where('active', '=', 1)
         ->orwhere('name', 'LIKE', '%' . $q . '%')
         ->orWhere('email', 'LIKE', '%' . $q . '')
         ->orWhere('company', 'LIKE', '%' . $q . '')

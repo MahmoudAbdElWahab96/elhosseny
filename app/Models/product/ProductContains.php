@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\product\Traits\ProductAttribute;
 use App\Models\product\Traits\ProductRelationship;
 use App\Models\product\Traits\ProductContainsRelationship;
+use App\Models\product\Traits\BelongsToBranch;
 
 class ProductContains extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
     ProductContainsRelationship {
         // ProductAttribute::getEditButtonAttribute insteadof ModelTrait;
     }

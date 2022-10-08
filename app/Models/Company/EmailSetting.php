@@ -2,10 +2,12 @@
 
 namespace App\Models\Company;
 
+use App\Models\Company\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 
 class EmailSetting extends Model
 {
+    use BelongsToBranch;
       /**
      * The database table used by the model.
      * @var string

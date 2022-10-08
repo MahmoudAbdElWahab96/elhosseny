@@ -4,10 +4,11 @@ namespace App\Models\product;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\product\Traits\ProductVariationRelationship;
+use App\Models\product\Traits\BelongsToBranch;
 
 class ProductVariation extends Model
 {
-        use ProductVariationRelationship{}
+        use BelongsToBranch,ProductVariationRelationship{}
 
          protected $table = 'product_variations';
 

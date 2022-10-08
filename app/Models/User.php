@@ -7,6 +7,7 @@ use App\Models\Access\User\Traits\Relationship\UserRelationship;
 use App\Models\Access\User\Traits\Scope\UserScope;
 use App\Models\Access\User\Traits\UserAccess;
 use App\Models\Access\User\Traits\UserSendPasswordReset;
+use App\Traits\BelongsToBranch;
 use Cmgmyr\Messenger\Traits\Messagable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

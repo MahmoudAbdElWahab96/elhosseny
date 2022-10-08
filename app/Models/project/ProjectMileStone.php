@@ -4,11 +4,12 @@ namespace App\Models\project;
 
 use App\Models\ModelTrait;
 use App\Models\project\Traits\MileStoneRelationship;
+use App\Models\project\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 
 class ProjectMileStone extends Model
 {
-        use ModelTrait,
+        use BelongsToBranch,ModelTrait,
     	MileStoneRelationship{}
     protected $table = 'project_milestones';
 

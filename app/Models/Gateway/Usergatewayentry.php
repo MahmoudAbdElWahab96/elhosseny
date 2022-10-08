@@ -2,6 +2,7 @@
 
 namespace App\Models\Gateway;
 
+use App\Models\Gateway\Traits\BelongsToBranch;
 use App\Models\ModelTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Gateway\Traits\UsergatewayentryAttribute;
@@ -9,7 +10,7 @@ use App\Models\Gateway\Traits\UsergatewayentryRelationship;
 
 class Usergatewayentry extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         UsergatewayentryAttribute,
     	UsergatewayentryRelationship {
             // UsergatewayentryAttribute::getEditButtonAttribute insteadof ModelTrait;

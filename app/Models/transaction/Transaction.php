@@ -3,13 +3,14 @@
 namespace App\Models\transaction;
 
 use App\Models\ModelTrait;
+use App\Models\transaction\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\transaction\Traits\TransactionAttribute;
 use App\Models\transaction\Traits\TransactionRelationship;
 
 class Transaction extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         TransactionAttribute,
     	TransactionRelationship {
             // TransactionAttribute::getEditButtonAttribute insteadof ModelTrait;

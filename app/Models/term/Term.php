@@ -3,13 +3,14 @@
 namespace App\Models\term;
 
 use App\Models\ModelTrait;
+use App\Models\term\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\term\Traits\TermAttribute;
 use App\Models\term\Traits\TermRelationship;
 
 class Term extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         TermAttribute,
     	TermRelationship {
             // TermAttribute::getEditButtonAttribute insteadof ModelTrait;

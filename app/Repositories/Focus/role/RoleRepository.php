@@ -100,7 +100,7 @@ class RoleRepository extends BaseRepository
             if ($role->save()) {
                 if ($all) {
                     $permissions = [];
-                    if (is_array($input['permission']) && count($input['permission'])) {
+                    if (isset($input['permission']) && is_array($input['permission']) && count($input['permission'])) {
                         foreach ($input['permission'] as $perm) {
                             if (is_numeric($perm)) {
                                 array_push($permissions, $perm);

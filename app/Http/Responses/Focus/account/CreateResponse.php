@@ -26,7 +26,7 @@ class CreateResponse implements Responsable
         $parents_accounts = Account::all()->pluck('holder', 'id')->toArray();
         $screens = Screen::all()->pluck('name_ar', 'id')->toArray();
         $cost_centers = [];
-        $level = ConfigMeta::where('value1','cost_center_account_level')->first()->value2;
+        $level = optional(ConfigMeta::where('value1','cost_center_account_level')->first())->value2;
 
         return view('focus.accounts.create',compact('account_types', 'account_level', 'parents_accounts', 'screens', 'cost_centers', 'level'));
     }

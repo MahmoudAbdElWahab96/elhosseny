@@ -91,14 +91,15 @@ class HrmsController extends Controller
      */
     public function store(ManageHrmRequest $request)
     {
-
+        $branches = $request->branches;
 
         //Input received from the request
-        $input['employee'] = $request->only(['first_name', 'last_name', 'email', 'picture', 'signature', 'password', 'role', 'increment']);
+        $input['employee'] = $request->only(['first_name', 'last_name', 'email', 'picture', 'signature', 'password', 'role', 'increment', 'branches']);
         $input['profile'] = $request->only(['contact', 'company', 'address_1', 'city', 'state', 'country', 'tax_id', 'postal']);
         $input['meta'] = $request->only(['department_id', 'salary', 'hra', 'entry_time', 'exit_time', 'sales_commission', 'shift', 'vacation']);
         $input['permission'] = $request->only(['permission']);
         $input['employee']['ins'] = auth()->user()->ins;
+        $input['branches'] = $branches;
 
         if (!empty($input['employee']['password'])) {
             $request->validate([
@@ -126,14 +127,14 @@ class HrmsController extends Controller
         }
 
         //Create the model using repository create method
-        try {
+        // try {
         $this->repository->create($input);
         //return with successfull message
         return new RedirectResponse(route('biller.hrms.index'), ['flash_success' => trans('alerts.backend.hrms.created')]);
-        }
-        catch (\Exception $e){
-            return new RedirectResponse(route('biller.hrms.index'), ['flash_error' => ' Code'.$e->getCode()]);
-        }
+        // }
+        // catch (\Exception $e){
+        //     return new RedirectResponse(route('biller.hrms.index'), ['flash_error' => ' Code'.$e->getCode()]);
+        // }
 
     }
 
@@ -163,7 +164,9 @@ class HrmsController extends Controller
 
 
         //Input received from the request
-        $input['employee'] = $request->only(['first_name', 'last_name', 'email', 'picture', 'signature', 'password', 'role','increment']);
+        $input['employee'] = $request->only(['first_name', 'last_name', 'email', 'picture', 'signature', 'password', 'role','increment', 'branches']);
+        $input['branches'] = $request->branches;
+
         if (!empty($input['employee']['password'])) {
             $request->validate([
                 'password' => ['required',
@@ -439,6 +442,11 @@ class HrmsController extends Controller
                     $permission,
                );
             }
+            if(str_contains($permission['name'],'crm')){
+                $permissions_all_data['crm'][] = array(    // push key,value in $new_array
+                    $permission,
+               );
+            }
             if(str_contains($permission['name'],'department')){
                 $permissions_all_data['department'][] = array(    // push key,value in $new_array
                     $permission,
@@ -519,8 +527,8 @@ class HrmsController extends Controller
                     $permission,
                );
             }
-            if(str_contains($permission['name'],'POS')){
-                $permissions_all_data['POS'][] = array(    // push key,value in $new_array
+            if(str_contains($permission['name'],'pos')){
+                $permissions_all_data['pos'][] = array(    // push key,value in $new_array
                     $permission,
                );
             }
@@ -531,6 +539,7 @@ class HrmsController extends Controller
             }
         }
         if ($create) $permissions = \App\Models\Access\Permission\PermissionUser::all()->keyBy('id')->where('user_id', '=', $create)->toArray();
+        dd($permissions_all_data);
         $role = Role::find($emp_role);
         // $rolePermissions = $role->permissions->pluck('id')->all();
         return view('focus.hrms.partials.role_permissions')->with(compact('permissions_all_data','permissions_all', 'create', 'permissions', 'role'));
@@ -653,10 +662,9 @@ class HrmsController extends Controller
         if ($role_valid->status < 1) {
             unset($request->role);
 
-            RoleUser::create(array('user_id' => $hrm->id, 'role_id' => $role));
-            if (isset($request->permissions)){
-                $hrm->permissions()->attach($request->permissions);
-            }
+            $hrm->permissions()->detach();
+
+            $hrm->permissions()->attach($role_valid->permissions);
 
             DB::commit();
             if ($hrm->id) {

@@ -3,13 +3,14 @@
 namespace App\Models\quote;
 
 use App\Models\ModelTrait;
+use App\Models\quote\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\quote\Traits\QuoteAttribute;
 use App\Models\quote\Traits\QuoteRelationship;
 
 class Quote extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         QuoteAttribute,
     	QuoteRelationship {
 

@@ -3,11 +3,12 @@
 namespace App\Models\items;
 
 use App\Models\items\Traits\InvoiceItemRelationship;
+use App\Models\items\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 
 class InvoiceItem extends Model
 {
-     use InvoiceItemRelationship {
+     use BelongsToBranch,InvoiceItemRelationship {
             // CustomfieldAttribute::getEditButtonAttribute insteadof ModelTrait;
         }
     protected $table = 'invoice_items';

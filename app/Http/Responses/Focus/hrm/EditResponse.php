@@ -5,6 +5,7 @@ namespace App\Http\Responses\Focus\hrm;
 use App\Models\Access\Permission\Permission;
 use App\Models\Access\Permission\PermissionUser;
 use App\Models\Access\Role\Role;
+use App\Models\Company\Branch;
 use App\Models\department\Department;
 use App\Models\hrm\HrmMeta;
 use Illuminate\Contracts\Support\Responsable;
@@ -43,7 +44,9 @@ class EditResponse implements Responsable
             return $q->where('role_id','=',$emp_role);
         })->get()->toArray();
         $permissions=PermissionUser::all()->keyBy('id')->where('user_id','=',$general['create'])->toArray();
-        return view('focus.hrms.edit',compact('hrms','roles','general','permissions_all','permissions','departments'));
+        $branches = Branch::all();
+
+        return view('focus.hrms.edit',compact('branches','hrms','roles','general','permissions_all','permissions','departments'));
 
     }
 }

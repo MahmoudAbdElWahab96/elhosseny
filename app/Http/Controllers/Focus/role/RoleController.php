@@ -115,6 +115,11 @@ class RoleController extends Controller
                     $permission,
                );
             }
+            if(str_contains($permission['name'],'crm')){
+                $permissions_all_data['crm'][] = array(    // push key,value in $new_array
+                    $permission,
+               );
+            }
             if(str_contains($permission['name'],'department')){
                 $permissions_all_data['department'][] = array(    // push key,value in $new_array
                     $permission,
@@ -195,8 +200,8 @@ class RoleController extends Controller
                     $permission,
                );
             }
-            if(str_contains($permission['name'],'POS')){
-                $permissions_all_data['POS'][] = array(    // push key,value in $new_array
+            if(str_contains($permission['name'],'pos')){
+                $permissions_all_data['pos'][] = array(    // push key,value in $new_array
                     $permission,
                );
             }
@@ -282,6 +287,11 @@ class RoleController extends Controller
                     $permission,
                );
             }
+            if(str_contains($permission['name'],'crm')){
+                $permissions_all_data['crm'][] = array(    // push key,value in $new_array
+                    $permission,
+               );
+            }
             if(str_contains($permission['name'],'department')){
                 $permissions_all_data['department'][] = array(    // push key,value in $new_array
                     $permission,
@@ -362,8 +372,8 @@ class RoleController extends Controller
                     $permission,
                );
             }
-            if(str_contains($permission['name'],'POS')){
-                $permissions_all_data['POS'][] = array(    // push key,value in $new_array
+            if(str_contains($permission['name'],'pos')){
+                $permissions_all_data['pos'][] = array(    // push key,value in $new_array
                     $permission,
                );
             }
@@ -373,6 +383,7 @@ class RoleController extends Controller
                );
             }
         }
+
         if (auth()->user()->ins == $role->ins) {
             return view('focus.hrms.roles.edit',compact('permissions_all_data'))
                 ->withRole($role)

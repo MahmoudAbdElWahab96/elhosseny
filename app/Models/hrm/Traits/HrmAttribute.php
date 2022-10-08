@@ -20,7 +20,7 @@ trait HrmAttribute
         return '
          ' . $this->getViewButtonAttribute("manage-hrm", "biller.hrms.show") . '
                 ' . $this->getEditButtonAttribute("manage-hrm", "biller.hrms.edit") . '
-            
+
                 ';
     }
 

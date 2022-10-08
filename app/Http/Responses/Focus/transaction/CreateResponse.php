@@ -18,7 +18,7 @@ class CreateResponse implements Responsable
      */
     public function toResponse($request)
     {
-        $level = ConfigMeta::where('value1','cost_center_account_level')->first()->value2;
+        $level = optional(ConfigMeta::where('value1','cost_center_account_level')->first())->value2;
         $accounts=Account::where('level', $level)->get();
         $transaction_categories=Transactioncategory::all();
         $dual_entry = ConfigMeta::withoutGlobalScopes()->where('feature_id', '=', 13)->first('feature_value');

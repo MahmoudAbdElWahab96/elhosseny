@@ -2,6 +2,7 @@
 
 namespace App\Models\customfield;
 
+use App\Models\customfield\Traits\BelongsToBranch;
 use App\Models\ModelTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\customfield\Traits\CustomfieldAttribute;
@@ -9,7 +10,7 @@ use App\Models\customfield\Traits\CustomfieldRelationship;
 
 class Customfield extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         CustomfieldAttribute,
     	CustomfieldRelationship {
             // CustomfieldAttribute::getEditButtonAttribute insteadof ModelTrait;

@@ -3,13 +3,14 @@
 namespace App\Models\tag;
 
 use App\Models\ModelTrait;
+use App\Models\tag\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\tag\Traits\TagAttribute;
 use App\Models\tag\Traits\TagRelationship;
 
 class Tag extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         TagAttribute,
     	TagRelationship {
             // TagAttribute::getEditButtonAttribute insteadof ModelTrait;

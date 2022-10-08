@@ -3,7 +3,7 @@
 namespace App\Models\market;
 
 use App\Models\invoice\Traits\SalesChannelAttribute;
-
+use App\Models\market\Traits\BelongsToBranch;
 use App\Models\market\Traits\ChannelBillRelationship;
 
 use App\Models\ModelTrait;
@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 class ChannelBill extends Model
 {
 
-        use ModelTrait,ChannelBillRelationship {
+        use BelongsToBranch,ModelTrait,ChannelBillRelationship {
         }
 
     protected $table = 'channel_bill';

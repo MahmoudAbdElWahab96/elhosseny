@@ -2,12 +2,13 @@
 
 namespace App\Models\Company;
 
+use App\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model
 {
 
-      protected $table = 'companies';
+    protected $table = 'companies';
 
     /**
      * Mass Assignable fields of model

@@ -3,12 +3,13 @@
 namespace App\Models\hrm;
 
 use App\Models\hrm\Traits\AttendanceRelationship;
+use App\Models\hrm\Traits\BelongsToBranch;
 use App\Models\ModelTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Attendance extends Model
 {
-      use ModelTrait,
+      use BelongsToBranch,ModelTrait,
          	AttendanceRelationship {
             // HrmAttribute::getEditButtonAttribute insteadof ModelTrait;
         }

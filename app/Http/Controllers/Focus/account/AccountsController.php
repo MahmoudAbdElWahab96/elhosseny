@@ -86,8 +86,8 @@ class AccountsController extends Controller
 
         //Input received from the request
         $input = $request->except(['_token', 'ins', 'cost_centers', 'cost_center_screens', 'cost_center_screens_names','parentAccountId']);
-   
-        $input['parent_account_id'] = $request->parent_account_id ? $request->parent_account_id : $request->account_type;  
+
+        $input['parent_account_id'] = $request->parent_account_id ? $request->parent_account_id : $request->account_type;
         $input['parent_account'] = Account::find($request->parent_account_id) ? Account::find($request->parent_account_id)->holder : optional(Account::find($request->account_type))->holder;
         $input['account_type'] = $request->account_type;
         $input['code'] = $request->number;
@@ -131,9 +131,9 @@ class AccountsController extends Controller
 
         //Input received from the request
         $input = $request->except(['_token', 'ins',  'cost_centers', 'cost_center_screens', 'cost_center_screens_names','parentAccountId']);
-  
+
         //Update the model using repository update method
-        $input['parent_account_id'] = $request->parent_account_id ? $request->parent_account_id : $request->account_type;  
+        $input['parent_account_id'] = $request->parent_account_id ? $request->parent_account_id : $request->account_type;
 
         $input['parent_account'] = Account::find($request->parent_account_id) ? Account::find($request->parent_account_id)->holder : optional(Account::find($request->account_type))->holder;
         $input['account_type'] = $request->account_type;

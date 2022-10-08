@@ -3,13 +3,14 @@
 namespace App\Models\warehouse;
 
 use App\Models\ModelTrait;
+use App\Models\warehouse\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\warehouse\Traits\WarehouseAttribute;
 use App\Models\warehouse\Traits\WarehouseRelationship;
 
 class Warehouse extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         WarehouseAttribute,
     	WarehouseRelationship {
             // WarehouseAttribute::getEditButtonAttribute insteadof ModelTrait;

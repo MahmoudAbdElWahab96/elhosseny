@@ -3,11 +3,12 @@
 namespace App\Models\items;
 
 use App\Models\items\Traits\RegisterRelationship;
+use App\Models\items\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 
 class Register extends Model
 {
-         use RegisterRelationship {
+         use BelongsToBranch,RegisterRelationship {
         }
     protected $table = 'registers';
 

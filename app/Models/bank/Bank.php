@@ -6,10 +6,11 @@ use App\Models\ModelTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\bank\Traits\BankAttribute;
 use App\Models\bank\Traits\BankRelationship;
+use App\Models\bank\Traits\BelongsToBranch;
 
 class Bank extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         BankAttribute,
     	BankRelationship {
             // BankAttribute::getEditButtonAttribute insteadof ModelTrait;

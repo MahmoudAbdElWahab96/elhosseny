@@ -113,7 +113,7 @@
 @section('extra-scripts')
     {{ Html::script('focus/js/select2.min.js') }}
     <script type="text/javascript">
-        
+
         var products;
         var productId=2
         function addNewProduct() {
@@ -136,7 +136,7 @@
             $(".products").select2({
                 tags: [],
                 ajax: {
-                    url: '{{route('biller.products.product_search',['label'])}}',
+                    url: '{{route('biller.products.product_search_post',['label'])}}',
                     dataType: 'json',
                     type: 'POST',
                     quietMillis: 50,

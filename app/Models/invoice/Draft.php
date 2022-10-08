@@ -2,6 +2,7 @@
 
 namespace App\Models\invoice;
 
+use App\Models\invoice\Traits\BelongsToBranch;
 use App\Models\invoice\Traits\DraftRelationship;
 use App\Models\ModelTrait;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +11,7 @@ use App\Models\invoice\Traits\InvoiceRelationship;
 
 class Draft extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         DraftRelationship {
     }
 

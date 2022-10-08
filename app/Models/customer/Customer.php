@@ -2,6 +2,7 @@
 
 namespace App\Models\customer;
 
+use App\Models\customer\Traits\BelongsToBranch;
 use App\Models\ModelTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\customer\Traits\CustomerAttribute;
@@ -9,7 +10,7 @@ use App\Models\customer\Traits\CustomerRelationship;
 
 class Customer extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         CustomerAttribute,
     	CustomerRelationship {
             // CustomerAttribute::getEditButtonAttribute insteadof ModelTrait;

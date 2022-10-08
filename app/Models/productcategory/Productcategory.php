@@ -3,13 +3,14 @@
 namespace App\Models\productcategory;
 
 use App\Models\ModelTrait;
+use App\Models\productcategory\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\productcategory\Traits\ProductcategoryAttribute;
 use App\Models\productcategory\Traits\ProductcategoryRelationship;
 
 class Productcategory extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         ProductcategoryAttribute,
     	ProductcategoryRelationship {
             // ProductcategoryAttribute::getEditButtonAttribute insteadof ModelTrait;

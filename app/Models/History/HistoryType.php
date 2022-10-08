@@ -3,6 +3,7 @@
 namespace App\Models\History;
 
 use App\Models\BaseModel;
+use App\Models\History\Traits\Relationship\BelongsToBranch;
 
 /**
  * Class HistoryType
@@ -10,6 +11,7 @@ use App\Models\BaseModel;
  */
 class HistoryType extends BaseModel
 {
+    use BelongsToBranch;
     /**
      * The database table used by the model.
      *

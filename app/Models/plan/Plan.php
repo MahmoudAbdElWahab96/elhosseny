@@ -3,13 +3,14 @@
 namespace App\Models\plan;
 
 use App\Models\ModelTrait;
+use App\Models\plan\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\plan\Traits\PlanAttribute;
 use App\Models\plan\Traits\PlanRelationship;
 
 class Plan extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         PlanAttribute,
     	PlanRelationship {
             // PlanAttribute::getEditButtonAttribute insteadof ModelTrait;

@@ -6,12 +6,13 @@ use App\Models\customer\Traits\CustomerAttribute;
 use App\Models\customer\Traits\CustomerRelationship;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Access\User\Traits\CustomerSendPasswordReset;
+use App\Models\customer\Traits\BelongsToBranch;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 
 class CustomerLogin extends Authenticatable
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         CustomerAttribute,
         CustomerSendPasswordReset,
         Notifiable,

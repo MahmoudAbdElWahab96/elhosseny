@@ -1,6 +1,6 @@
 @php
     use Illuminate\Support\Facades\Route;
-$horizon=feature(12)['value2'];
+$horizon=feature(12)?feature(12)['value2']:'';
 @endphp
         <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="{{visual()}}">

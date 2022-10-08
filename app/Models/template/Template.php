@@ -3,13 +3,14 @@
 namespace App\Models\template;
 
 use App\Models\ModelTrait;
+use App\Models\template\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\template\Traits\TemplateAttribute;
 use App\Models\template\Traits\TemplateRelationship;
 
 class Template extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         TemplateAttribute,
     	TemplateRelationship {
             // TemplateAttribute::getEditButtonAttribute insteadof ModelTrait;

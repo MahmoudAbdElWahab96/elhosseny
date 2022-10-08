@@ -6,10 +6,11 @@ use App\Models\ModelTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\project\Traits\TaskAttribute;
 use App\Models\project\Traits\TaskRelationship;
+use App\Models\project\Traits\BelongsToBranch;
 
 class Task extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         TaskAttribute,
     	TaskRelationship {
             // TaskAttribute::getEditButtonAttribute insteadof ModelTrait;

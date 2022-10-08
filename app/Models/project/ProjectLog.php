@@ -2,10 +2,13 @@
 
 namespace App\Models\project;
 
+use App\Models\project\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 
 class ProjectLog extends Model
 {
+    use BelongsToBranch;
+
     protected $table = 'project_logs';
 
     /**

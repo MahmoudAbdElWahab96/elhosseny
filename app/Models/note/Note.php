@@ -3,13 +3,14 @@
 namespace App\Models\note;
 
 use App\Models\ModelTrait;
+use App\Models\note\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\note\Traits\NoteAttribute;
 use App\Models\note\Traits\NoteRelationship;
 
 class Note extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         NoteAttribute,
     	NoteRelationship {
             // NoteAttribute::getEditButtonAttribute insteadof ModelTrait;

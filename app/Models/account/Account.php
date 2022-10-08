@@ -6,11 +6,13 @@ use App\Models\ModelTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\account\Traits\AccountAttribute;
 use App\Models\account\Traits\AccountRelationship;
+use App\Models\account\Traits\BelongsToBranch;
 use App\Models\screen\Screen;
 
 class Account extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,
+        ModelTrait,
         AccountAttribute,
     	AccountRelationship {
             // AccountAttribute::getEditButtonAttribute insteadof ModelTrait;
@@ -95,7 +97,7 @@ class Account extends Model
     {
         $debit = 0; $credit = 0;
         $parent = $this->parentAccount();
-        
+
         foreach($parent->subAccounts as $child){
             $debit += $child->debit;
             $credit += $child->credit;
@@ -110,18 +112,18 @@ class Account extends Model
                 foreach($v->subAccounts as $c){
                     $deb += $c->debit;
                     $cre += $c->credit;
-            
+
                     $v->debit = $deb;
                     $v->credit = $cre;
                     $v->save();
 
                     $de = 0; $cr = 0;
-            
+
                     if($b = $v->parentAccount()){
                         foreach($b->subAccounts as $r){
                             $de += $r->debit;
                             $cr += $r->credit;
-                        
+
                             $b->debit = $de;
                             $b->credit = $cr;
                             $b->save();
@@ -132,13 +134,13 @@ class Account extends Model
                                 foreach($n->subAccounts as $o){
                                     $ded += $o->debit;
                                     $crd += $o->credit;
-                                    
+
                                     $n->debit = $ded;
                                     $n->credit = $crd;
                                     $n->save();
 
                                     $dee = 0; $cee = 0;
-    
+
                                     if($m = $n->parentAccount()){
                                         foreach($m->subAccounts as $l){
                                             $dee += $l->debit;
@@ -151,7 +153,7 @@ class Account extends Model
                                     }
                                 }
                             }
-                        }      
+                        }
                     }
                 }
             }

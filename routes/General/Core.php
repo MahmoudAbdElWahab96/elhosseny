@@ -66,7 +66,14 @@ Route::group(['namespace' => '\App\Http\Controllers\Focus', 'as' => 'biller.'], 
         Route::post('project_attachment', 'FileController@project_attachment')->name('project_attachment');
         Route::post('bill_cancel', 'GeneralController@bill_cancel')->name('bill_cancel');
         Route::get('business/settings', 'CompanyController@manage')->name('business.settings');
-        Route::post('business/update_settings', 'CompanyController@update')->name('business.update_settings');
+        Route::get('business/update_settings/{id}', 'CompanyController@edit')->name('business.update_settings');
+        Route::post('business/update_settings/{id}', 'CompanyController@update')->name('business.update_settings');
+        Route::post('business/company/delete/{id}', 'CompanyController@delete')->name('business.delete_company');
+        Route::post('business/add_company', 'CompanyController@addCompany')->name('business.add_company');
+        Route::resource('branches', 'BranchesController');
+         //For Datatable
+        Route::post('branches/get', 'BranchesTableController')->name('branches.get');
+        Route::get('branches/update/user/branch/{id}', 'BranchesController@updateUserBranch')->name('update.user.branch');
         Route::get('business/billing_settings', 'CompanyController@billing_settings')->name('business.billing_settings');
         Route::post('business/billing_settings_update', 'CompanyController@billing_settings_update')->name('business.billing_settings_update');
         Route::get('activate', 'CompanyController@activate')->name('activate');

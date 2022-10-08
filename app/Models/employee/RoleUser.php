@@ -2,13 +2,14 @@
 
 namespace App\Models\employee;
 
+use App\Models\employee\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\employee\Traits\RoleUserRelationship;
 
 class RoleUser extends Model
 {
-    use   RoleUserRelationship {
+    use  BelongsToBranch,RoleUserRelationship {
 
         }
 

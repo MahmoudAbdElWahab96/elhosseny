@@ -14,12 +14,15 @@
                    aria-selected="false">{{trans('hrms.hrms')}}</a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" id="base-tab4" data-toggle="tab" aria-controls="tab4" href="#tab4" role="tab"
+                   aria-selected="false">{{trans('hrms.branchs')}}</a>
+            </li>
 
         </ul>
         <div class="tab-content px-1 pt-1">
             <div class="tab-pane active" id="tab1" role="tabpanel" aria-labelledby="base-tab1">
-
-                <div class='form-group'>
+                 <div class='form-group'>
                     {{ Form::label( 'increment', trans('hrms.increment'),['class' => 'col-lg-2 control-label']) }}
                     <div class='col-lg-10'>
                         {{ Form::text('increment', null, ['class' => 'form-control round', 'placeholder' => trans('hrms.increment').'*','required'=>'required']) }}
@@ -41,7 +44,7 @@
                 <div class='form-group'>
                     {{ Form::label( 'email', trans('hrms.email'),['class' => 'col-lg-2 control-label']) }}
                     <div class='col-lg-10'>
-                        {{ Form::text('email', null, ['class' => 'form-control round', 'placeholder' => trans('hrms.email').'*','required'=>'required']) }}
+                        {{ Form::email('email', null, ['class' => 'form-control round', 'placeholder' => trans('hrms.email').'*','required'=>'required']) }}
                     </div>
                 </div>
                 <div class='form-group'>
@@ -306,12 +309,35 @@
                     </div>
                 </div>
             </div>
+
+            <div class="tab-pane" id="tab4" role="tabpanel" aria-labelledby="base-tab4">
+                <div class='form-group'>
+                    {{ Form::label( 'branches', trans('branches.name'),['class' => 'col-lg-2 control-label', ]) }}
+                        <div class='col-lg-10'>
+                            <select class="form-control select2" id="branch_id" name="branches[]" multiple>
+                                @foreach($branches as $branch)
+                                    <option value="{{$branch->id}}"
+                                            @if(@$hrms->branch_id == $branch->id) selected @endif>{{$branch->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 @section('after-scripts')
     {{ Html::script('focus/js/jquery.password-validation.js') }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script>
+        $('#branch_id').select2({
+            placeholder: "@lang('models/shipments.placeholders.select_country')",
+            width: 'resolve',
+            multiple: true
+        });
+
         $(document).ready(function () {
             $("#u_password").passwordValidation({
                 minLength: 6,
@@ -387,5 +413,8 @@
 
         @if(isset($hrms->role['id']))  fresh_permission({{$hrms->role['id']}});
         @else fresh_permission(2); @endif
+
+
+
     </script>
 @endsection

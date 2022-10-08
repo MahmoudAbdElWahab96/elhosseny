@@ -12,6 +12,7 @@ use DB;
 use Carbon\Carbon;
 use App\Models\hrm\Hrm;
 use App\Exceptions\GeneralException;
+use App\Models\Company\UserBranch;
 use App\Repositories\BaseRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -65,7 +66,6 @@ class HrmRepository extends BaseRepository
      */
     public function create(array $input)
     {
-
         if (!empty($input['employee']['picture'])) {
             $input['employee']['picture'] = $this->uploadPicture($input['employee']['picture'], $this->file_picture_path);
         }
@@ -80,18 +80,35 @@ class HrmRepository extends BaseRepository
         })->where('id', '=', $role)->first();
 
         unset($input['employee']['role']);
+
         $input['employee']['created_by'] = auth()->user()->id;
         $input['employee']['confirmed'] = 1;
         $input['profile'] = array_map( 'strip_tags', $input['profile']);
-        $input['meta'] = array_map( 'strip_tags', $input['meta']);
-        $input['employee'] = array_map( 'strip_tags', $input['employee']);
+        // $input['meta'] = array_map( 'strip_tags', $input['meta']);
+        // $input['employee'] = array_map( 'strip_tags', $input['employee']);
+
+
+        if($input['branches']){
+            $input['employee']['branch_id'] = $input['employee']['branches'][0];
+        }
 
         $hrm = Hrm::create($input['employee']);
         DB::commit();
 
+        if($input['branches']){
+            foreach($input['branches'] as $branch_id){
+                UserBranch::create([
+                    'user_id' => $hrm->id,
+                    'branch_id' => $branch_id
+                ]);
+            }
+        }
+
         $input['profile']['user_id'] = $hrm->id;
         $input['meta']['user_id'] = $hrm->id;
         UserProfile::create($input['profile']);
+        $input['meta']['vacation'] = json_encode($input['meta']['vacation']??'');
+
         HrmMeta::create($input['meta']);
 
 
@@ -149,9 +166,22 @@ class HrmRepository extends BaseRepository
 
         $input['profile'] = array_map( 'strip_tags', $input['profile']);
         $user = UserProfile::where('user_id', $hrm->id)->update($input['profile']);
+        $input['employee']['branch_id'] = $input['employee']['branches'][0];
+
 
         if ($hrm->update($input['employee'])) DB::commit();
 
+
+        if($input['branches']){
+            UserBranch::where('user_id', $hrm->id)->delete();
+
+            foreach($input['branches'] as $branch_id){
+                UserBranch::create([
+                    'user_id' => $hrm->id,
+                    'branch_id' => $branch_id
+                ]);
+            }
+        }
         $input['meta'] = array_map( 'strip_tags', $input['meta']);
         $input['meta']['user_id'] = $hrm->id;
 

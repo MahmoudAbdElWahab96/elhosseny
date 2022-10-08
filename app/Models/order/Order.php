@@ -3,13 +3,14 @@
 namespace App\Models\order;
 
 use App\Models\ModelTrait;
+use App\Models\order\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\order\Traits\OrderAttribute;
 use App\Models\order\Traits\OrderRelationship;
 
 class Order extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         OrderAttribute,
     	OrderRelationship {
 

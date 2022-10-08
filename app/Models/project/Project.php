@@ -3,13 +3,14 @@
 namespace App\Models\project;
 
 use App\Models\ModelTrait;
+use App\Models\project\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\project\Traits\ProjectAttribute;
 use App\Models\project\Traits\ProjectRelationship;
 
 class Project extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         ProjectAttribute,
     	ProjectRelationship {
             // ProjectAttribute::getEditButtonAttribute insteadof ModelTrait;

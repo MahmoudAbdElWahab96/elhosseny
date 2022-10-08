@@ -4,11 +4,12 @@ namespace App\Models\product;
 
 use App\Models\ModelTrait;
 use App\Models\product\Traits\ProductMetaRelationship;
+use App\Models\product\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 
 class ProductMeta extends Model
 {
-        use ModelTrait,
+        use BelongsToBranch,ModelTrait,
     	ProductMetaRelationship {
             // ProductAttribute::getEditButtonAttribute insteadof ModelTrait;
         }

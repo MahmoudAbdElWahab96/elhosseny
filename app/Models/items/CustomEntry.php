@@ -2,12 +2,14 @@
 
 namespace App\Models\items;
 
+use App\Models\items\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ModelTrait;
 use App\Models\items\Traits\CustomentryRelationship;
+
 class CustomEntry extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
     	CustomentryRelationship {
             // CustomfieldAttribute::getEditButtonAttribute insteadof ModelTrait;
         }

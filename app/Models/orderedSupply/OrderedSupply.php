@@ -6,10 +6,11 @@ use App\Models\ModelTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\orderedSupply\Traits\OrderedSupplyAttribute;
 use App\Models\orderedSupply\Traits\OrderedSupplyRelationship;
+use App\Models\orderedSupply\Traits\BelongsToBranch;
 
 class OrderedSupply extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         OrderedSupplyAttribute,
         OrderedSupplyRelationship {
     }

@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\screen\Traits\ScreenAttribute;
 use App\Models\screen\Traits\ScreenRelationship;
 use App\Models\costCenter\CostCenter;
+use App\Models\screen\Traits\BelongsToBranch;
 
 class Screen extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         ScreenAttribute,
         ScreenRelationship {
         // BankAttribute::getEditButtonAttribute insteadof ModelTrait;

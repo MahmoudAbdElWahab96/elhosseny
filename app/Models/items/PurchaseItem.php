@@ -3,11 +3,12 @@
 namespace App\Models\items;
 
 use App\Models\items\Traits\PurchaseItemRelationship;
+use App\Models\items\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 
 class PurchaseItem extends Model
 {
-    use PurchaseItemRelationship {
+    use BelongsToBranch,PurchaseItemRelationship {
         // CustomfieldAttribute::getEditButtonAttribute insteadof ModelTrait;
     }
 

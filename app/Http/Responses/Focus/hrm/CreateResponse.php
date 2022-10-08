@@ -3,6 +3,7 @@
 namespace App\Http\Responses\Focus\hrm;
 
 use App\Models\Access\Role\Role;
+use App\Models\Company\Branch;
 use App\Models\department\Department;
 use Illuminate\Contracts\Support\Responsable;
 
@@ -21,6 +22,8 @@ class CreateResponse implements Responsable
         $query->where('ins', '=', auth()->user()->ins)->orWhereNull('ins');})->get();
         $departments = Department::all();
         $general['create']=1;
-        return view('focus.hrms.create',compact('roles','general','departments'));
+        $branches = Branch::all();
+
+        return view('focus.hrms.create',compact('roles','general','departments', 'branches'));
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models\department;
 
+use App\Models\department\Traits\BelongsToBranch;
 use App\Models\ModelTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\department\Traits\DepartmentAttribute;
@@ -9,7 +10,7 @@ use App\Models\department\Traits\DepartmentRelationship;
 
 class Department extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         DepartmentAttribute,
     	DepartmentRelationship {
             // DepartmentAttribute::getEditButtonAttribute insteadof ModelTrait;

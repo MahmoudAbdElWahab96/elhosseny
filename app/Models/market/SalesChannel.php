@@ -6,11 +6,12 @@ use App\Models\items\Traits\RegisterRelationship;
 use App\Models\market\Traits\SalesChannelAttribute;
 use App\Models\market\Traits\SalesChannelRelationship;
 use App\Models\ModelTrait;
+use App\Models\market\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 
 class SalesChannel extends Model
 {
-            use ModelTrait,SalesChannelRelationship,SalesChannelAttribute {
+            use BelongsToBranch,ModelTrait,SalesChannelRelationship,SalesChannelAttribute {
         }
     protected $table = 'channel';
 

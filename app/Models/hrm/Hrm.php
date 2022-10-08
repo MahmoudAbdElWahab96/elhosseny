@@ -2,6 +2,7 @@
 
 namespace App\Models\hrm;
 
+use App\Models\hrm\Traits\BelongsToBranch;
 use App\Models\ModelTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\hrm\Traits\HrmAttribute;
@@ -9,7 +10,7 @@ use App\Models\hrm\Traits\HrmRelationship;
 
 class Hrm extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         HrmAttribute,
         HrmRelationship {
         // HrmAttribute::getEditButtonAttribute insteadof ModelTrait;
@@ -90,4 +91,5 @@ class Hrm extends Model
             $this->attributes['password'] = bcrypt($password);
         }
     }
+
 }

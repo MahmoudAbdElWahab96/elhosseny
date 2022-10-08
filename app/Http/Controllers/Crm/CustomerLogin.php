@@ -102,7 +102,6 @@ class CustomerLogin extends Controller
 
     public function login(Request $request)
     {
-
         $this->validateLogin($request);
 
 

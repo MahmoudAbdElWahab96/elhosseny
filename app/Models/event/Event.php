@@ -2,6 +2,7 @@
 
 namespace App\Models\event;
 
+use App\Models\event\Traits\BelongsToBranch;
 use App\Models\ModelTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\event\Traits\EventAttribute;
@@ -9,7 +10,7 @@ use App\Models\event\Traits\EventRelationship;
 
 class Event extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         EventAttribute,
     	EventRelationship {
             // EventAttribute::getEditButtonAttribute insteadof ModelTrait;

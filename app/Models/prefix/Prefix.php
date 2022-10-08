@@ -3,13 +3,14 @@
 namespace App\Models\prefix;
 
 use App\Models\ModelTrait;
+use App\Models\prefix\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\prefix\Traits\PrefixAttribute;
 use App\Models\prefix\Traits\PrefixRelationship;
 
 class Prefix extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         PrefixAttribute,
     	PrefixRelationship {
             // PrefixAttribute::getEditButtonAttribute insteadof ModelTrait;

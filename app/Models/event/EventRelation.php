@@ -4,12 +4,13 @@ namespace App\Models\event;
 
 use App\Models\event\Traits\EventRelationRelationship;
 use App\Models\ModelTrait;
+use App\Models\event\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 
 
 class EventRelation extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
     	EventRelationRelationship {
             // EventAttribute::getEditButtonAttribute insteadof ModelTrait;
         }

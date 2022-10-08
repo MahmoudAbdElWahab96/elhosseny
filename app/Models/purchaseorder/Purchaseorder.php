@@ -3,13 +3,14 @@
 namespace App\Models\purchaseorder;
 
 use App\Models\ModelTrait;
+use App\Models\purchaseorder\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\purchaseorder\Traits\PurchaseorderAttribute;
 use App\Models\purchaseorder\Traits\PurchaseorderRelationship;
 
 class Purchaseorder extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         PurchaseorderAttribute,
     	PurchaseorderRelationship {
 

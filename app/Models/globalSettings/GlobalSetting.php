@@ -2,6 +2,9 @@
 
 namespace App\Models\globalSettings;
 
+use App\Models\globalSettings\Traits\BelongsToBranch;
+use App\Models\globalSettings\Traits\GlobalSettingAttribute;
+use App\Models\globalSettings\Traits\GlobalSettingRelationship;
 use App\Models\ModelTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\globalSettings\Traits\SubTaxAttribute;
@@ -9,7 +12,7 @@ use App\Models\globalSettings\Traits\SubTaxRelationship;
 
 class GlobalSetting extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         GlobalSettingAttribute,
     	GlobalSettingRelationship {
         }

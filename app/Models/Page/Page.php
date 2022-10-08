@@ -5,12 +5,13 @@ namespace App\Models\Page;
 use App\Models\BaseModel;
 use App\Models\ModelTrait;
 use App\Models\Page\Traits\Attribute\PageAttribute;
+use App\Models\Page\Traits\BelongsToBranch;
 use App\Models\Page\Traits\PageRelationship;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Page extends BaseModel
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         SoftDeletes,
         PageRelationship,
         PageAttribute {

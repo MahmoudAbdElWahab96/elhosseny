@@ -1,6 +1,7 @@
 <?php
 
 use App\Helpers\uuid;
+use App\Models\Company\Branch;
 use App\Models\Company\ConfigMeta;
 use App\Models\hrm\Hrm;
 use App\Models\Notification\Notification;
@@ -978,7 +979,7 @@ if (!function_exists('get_client_ip')) {
     function dual_entry($cid=null)
     {
         $dual_entry = ConfigMeta::where('feature_id', '=', 13)->first();
-        return $dual_entry['feature_value'];
+        return $dual_entry?$dual_entry['feature_value']:'';
     }
 
 function message_body($category,$template_type,$bill,$link,$template_title=null){
@@ -1038,5 +1039,27 @@ function rose_plugins_checker()
                                                            href="#"><i
                                                                     class="ft-chevron-right"></i> Not Available
                                                         </a></li>';
+    }
+}
+
+
+
+if (!function_exists('branch_id')) {
+    /**
+     * Get id of current company.
+     *
+     * @return int
+     */
+    function branch_id()
+    {
+        if (app()->runningInConsole()) {
+        // dd(optional(Branch::first())->id);
+            return optional(Branch::first())->id;
+        }
+
+        $branch_id = (auth()->check()) ? auth()->user()->branch_id : 0 ;
+
+        return optional(Branch::find($branch_id))->id;
+        //*********************** */
     }
 }

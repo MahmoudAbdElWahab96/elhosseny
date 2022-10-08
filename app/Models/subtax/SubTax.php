@@ -3,13 +3,14 @@
 namespace App\Models\subtax;
 
 use App\Models\ModelTrait;
+use App\Models\subtax\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\subtax\Traits\SubTaxAttribute;
 use App\Models\subtax\Traits\SubTaxRelationship;
 
 class SubTax extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         SubTaxAttribute,
     	SubTaxRelationship {
             // BankAttribute::getEditButtonAttribute insteadof ModelTrait;

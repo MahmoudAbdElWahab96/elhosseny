@@ -9,6 +9,7 @@ use App\Models\BaseModel;
  */
 class PasswordReset extends BaseModel
 {
+
     public $timestamps = false;
     protected $table = 'password_resets';
     protected $fillable = [

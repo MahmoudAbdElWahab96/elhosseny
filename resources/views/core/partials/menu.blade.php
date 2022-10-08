@@ -423,22 +423,67 @@
                                     class="badge badge-pill badge-warning badge-up">{{Auth::user()->newThreadsCount()}}</span></a>
 
                     </li>
-                    <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link"
+                    @php $branches = App\Models\Company\Branch::where('id', '<>', auth()->user()->branch_id)->get(); @endphp
+                    <li class="dropdown dropdown-user nav-item">
+                        <div class="dropdown">
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            @foreach($branches as $branch)
+                                <form action="{{route('biller.update.user.branch', $branch->id)}}" method="POST">
+                                    {{csrf_token()}}
+
+                                    <input type="hidden" name="branch_id" value="{{$branch->id}}">
+
+                                    <a href="#branch" data-toggle="modal" data-remote="false"
+                                               class="dropdown-item branch" style="padding:5px"
+                                               >{{$branch->name}}</a>
+                                    <input type="submit">
+                                </form>
+                        @endforeach
+
+                            </div>
+                        </div>
+                    </li>
+
+
+                <div class="dropdown">
+                    <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                        <span class="avatar avatar-online">
+                        </span>
+                        <span class="user-name">الفروع</span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                        @foreach($branches as $branch)
+                            <li role="presentation" style="padding: 10px 20px;width: auto;font-weight: bold;cursor: pointer;"><a role="menuitem" tabindex="-1" href="{{ route('biller.update.user.branch', $branch->id) }}">{{ $branch->name }}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
+                    <li class="dropdown dropdown-user nav-item">
+                        <a class="dropdown-toggle nav-link dropdown-user-link"
                                                                    href="#" data-toggle="dropdown"><span
-                                    class="avatar avatar-online"><img
+                                        class="avatar avatar-online">
+                                    <img
                                         src="{{ Storage::disk('public')->url('app/public/img/users/' . @$logged_in_user->picture) }}"
-                                        alt=""><i></i></span><span class="user-name">{{ $logged_in_user->name }}</span></a>
-                        <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item"
+                                        alt="">
+                                        <i></i>
+                                    </span>
+                                    <span class="user-name">{{ $logged_in_user->name }}</span>
+                                </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item"
                                                                           href="{{ route('biller.profile') }}"><i
                                         class="ft-user"></i> {{ trans('navs.frontend.user.account')}}</a><a
                                     class="dropdown-item" href="{{route('biller.messages')}}"><i class="ft-mail"></i> My
-                                Inbox</a><a
+                                Inbox</a>
+                                <a
                                     class="dropdown-item" href="{{route('biller.todo')}}"><i
                                         class="ft-check-square"></i>
-                                {{ trans('general.tasks')}}</a><a
-                                    class="dropdown-item" href="{{route('biller.attendance')}}"><i
-                                        class="ft-activity"></i>
-                                {{ trans('hrms.attendance')}}</a>
+                                {{ trans('general.tasks')}}</a>
+
+                                <a class="dropdown-item" href="{{route('biller.attendance')}}">
+                                    <i class="ft-activity"></i>
+                                    {{ trans('hrms.attendance')}}
+                                </a>
 
 
                             <div class="dropdown-divider"></div>
@@ -448,6 +493,7 @@
 
                         </div>
                     </li>
+
                 </ul>
             </div>
         </div>

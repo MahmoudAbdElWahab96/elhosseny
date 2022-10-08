@@ -2,6 +2,7 @@
 
 namespace App\Models\misc;
 
+use App\Models\misc\Traits\BelongsToBranch;
 use App\Models\ModelTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\misc\Traits\MiscAttribute;
@@ -9,7 +10,7 @@ use App\Models\misc\Traits\MiscRelationship;
 
 class Misc extends Model
 {
-    use ModelTrait,
+    use BelongsToBranch,ModelTrait,
         MiscAttribute,
     	MiscRelationship {
             // MiscAttribute::getEditButtonAttribute insteadof ModelTrait;
