@@ -192,9 +192,8 @@ class StatementController extends Controller
                 $lang['party'] =  trans('meta.income_statement');
                 $file_name = preg_replace('/[^A-Za-z0-9]+/', '-', $lang['title'] . '_' .  trans('meta.income_statement'));
 
-               // $category = Transactioncategory::whereIn('id',json_decode($default_category['value1']))->get();
-               // dd($category);
-                $transactions = Transaction::whereBetween('payment_date', [date_for_database($reports->from_date), date_for_database_plus($reports->to_date)])->whereIn('trans_category_id', json_decode($default_category['value1']))->get();
+            //    $category = Transactioncategory::whereIn('id',json_decode($default_category['value1']))->get();
+                $transactions = Transaction::whereBetween('payment_date', [date_for_database($reports->from_date), date_for_database_plus($reports->to_date)])->whereIn('trans_category_id', array($default_category['value1']))->get();
 
                 break;
             case 'expenses':
@@ -206,7 +205,7 @@ class StatementController extends Controller
                // $category = Transactioncategory::find($default_category['feature_value']);
                 $lang['party'] = trans('meta.expense_statement');
                 $file_name = preg_replace('/[^A-Za-z0-9]+/', '-', $lang['title'] . '_' . trans('meta.expense_statement'));
-                $transactions = Transaction::whereBetween('payment_date', [date_for_database($reports->from_date), date_for_database_plus($reports->to_date)])->whereIn('trans_category_id',  json_decode($default_category['value1']))->get();
+                $transactions = Transaction::whereBetween('payment_date', [date_for_database($reports->from_date), date_for_database_plus($reports->to_date)])->whereIn('trans_category_id',  array($default_category['value1']))->get();
 
                 break;
 
