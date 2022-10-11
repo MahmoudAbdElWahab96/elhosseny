@@ -278,6 +278,8 @@ class StatementController extends Controller
                 return Response::stream($pdf->Output($file_name . '.pdf', 'I'), 200, $headers);
                 break;
             case 'pdf':
+                ob_clean(); // cleaning the buffer before Output()
+
                 $html = view('focus.report.pdf.account', compact('account_details', 'transactions', 'lang'))->render();
                 $pdf = new \Mpdf\Mpdf(config('pdf'));
                 $pdf->autoLangToFont  = true;
