@@ -113,11 +113,11 @@ class ChartController extends Controller
                 break;
 
             case 'income_vs_expenses':
-                $income_category = ConfigMeta::where('feature_id', '=', 8)->first('value1');
-                $purchase_category = ConfigMeta::where('feature_id', '=', 10)->first('value1');
+                $income_category = ConfigMeta::withoutGlobalScopes()->where('feature_id', '=', 8)->first('feature_value');
+                $purchase_category = ConfigMeta::withoutGlobalScopes()->where('feature_id', '=', 10)->first('feature_value');
 
-                $chart_result['income'] = Transaction::whereIn('trans_category_id', json_decode($income_category['value1']))->whereBetween('payment_date', [$c['from_date'], $c['to_date']])->sum('credit');
-                $chart_result['expense'] = Transaction::whereIn('trans_category_id', json_decode($purchase_category['value1']))->whereBetween('payment_date', [$c['from_date'], $c['to_date']])->sum('debit');
+                $chart_result['income'] = Transaction::where('trans_category_id', json_decode($income_category['feature_value']))->whereBetween('payment_date', [$c['from_date'], $c['to_date']])->sum('credit');
+                $chart_result['expense'] = Transaction::where('trans_category_id', json_decode($purchase_category['feature_value']))->whereBetween('payment_date', [$c['from_date'], $c['to_date']])->sum('debit');
 
 
                 $lang['title'] = trans('meta.income_vs_expenses_overview');

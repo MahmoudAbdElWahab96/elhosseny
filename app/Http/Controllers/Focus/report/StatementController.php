@@ -193,7 +193,7 @@ class StatementController extends Controller
                 $file_name = preg_replace('/[^A-Za-z0-9]+/', '-', $lang['title'] . '_' .  trans('meta.income_statement'));
 
             //    $category = Transactioncategory::whereIn('id',json_decode($default_category['value1']))->get();
-                $transactions = Transaction::whereBetween('payment_date', [date_for_database($reports->from_date), date_for_database_plus($reports->to_date)])->whereIn('trans_category_id', array($default_category['value1']))->get();
+                $transactions = Transaction::whereBetween('payment_date', [date_for_database($reports->from_date), date_for_database_plus($reports->to_date)])->where('trans_category_id', $default_category['feature_value'])->get();
 
                 break;
             case 'expenses':
@@ -205,7 +205,7 @@ class StatementController extends Controller
                // $category = Transactioncategory::find($default_category['feature_value']);
                 $lang['party'] = trans('meta.expense_statement');
                 $file_name = preg_replace('/[^A-Za-z0-9]+/', '-', $lang['title'] . '_' . trans('meta.expense_statement'));
-                $transactions = Transaction::whereBetween('payment_date', [date_for_database($reports->from_date), date_for_database_plus($reports->to_date)])->whereIn('trans_category_id',  array($default_category['value1']))->get();
+                $transactions = Transaction::whereBetween('payment_date', [date_for_database($reports->from_date), date_for_database_plus($reports->to_date)])->where('trans_category_id',  $default_category['feature_value'])->get();
 
                 break;
 
@@ -522,7 +522,7 @@ class StatementController extends Controller
                 $product = Productcategory::where('id', '=', $reports->product_category)->first();
                 $lang['title'] = trans('meta.product_warehouse_statement');
                 $lang['module'] = 'product_statement';
-                $lang['party'] = $product['title'];
+                $lang['party'] = $product['title']??'';
                 $lang['party_2'] = trans('products.product');
                 $transfer = 2;
                 $file_name = preg_replace('/[^A-Za-z0-9]+/', '-', $lang['title'] . '_' . $reports->from_date);

@@ -228,3 +228,5 @@ ALTER TABLE `rose_branches` CHANGE `country` `country` VARCHAR(256) CHARACTER SE
 
 
 ALTER TABLE `rose_prefixes` DROP `branch_id`;
+
+ALTER TABLE `rose_config_meta` DROP `branch_id`;

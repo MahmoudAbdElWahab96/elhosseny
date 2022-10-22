@@ -84,26 +84,26 @@ class CoreDashboard extends Controller
 
         $transactions = Transaction::whereRaw("(DATE(payment_date) between '$start_date' AND '$today') AND relation_id!=-1");
         $data['transactions'] = $transactions->where('payment_date', '=', $today)->select('payment_date', DB::raw('sum(credit) as credit'))->get()->first();
-        $income_category = ConfigMeta::where('feature_id', '=', 8)->first();
+        $income_category = ConfigMeta::withoutGlobalScopes()->where('feature_id', '=', 8)->first('feature_value');
 
-        $purchase_category = ConfigMeta::where('feature_id', '=', 10)->first(['feature_value','value1']);
+        $purchase_category = ConfigMeta::withoutGlobalScopes()->where('feature_id', '=', 10)->first('feature_value');
 
-        $income_category=json_decode($income_category['value1'])??[];
-        $purchase_category =json_decode($purchase_category['value1'])??[];
+        $income_category=json_decode($income_category['feature_value'])??[];
+        $purchase_category =json_decode($purchase_category['feature_value'])??[];
 
 
        // $transactions_today = Transaction::where('payment_date', $today);
-        $exp_today=Transaction::where('payment_date', $today)->whereIn('trans_category_id', $purchase_category)->select(DB::raw('sum(debit) as debit'))->get()->first();
-        $inc_today=Transaction::where('payment_date', $today)->whereIn('trans_category_id', $income_category)->select(DB::raw('sum(credit) as credit'))->get()->first();
+        $exp_today=Transaction::where('payment_date', $today)->where('trans_category_id', $purchase_category)->select(DB::raw('sum(debit) as debit'))->get()->first();
+        $inc_today=Transaction::where('payment_date', $today)->where('trans_category_id', $income_category)->select(DB::raw('sum(credit) as credit'))->get()->first();
 
 
         $transactions = Transaction::whereBetween('payment_date', [$start_date, $today])->get();
 
-        $transactions_chart['income'] = $transactions->whereIn('trans_category_id', $income_category);
-        $transactions_chart['expenses'] = $transactions->whereIn('trans_category_id', $purchase_category);
-        $transactions_chart['income_total'] = $transactions->whereIn('trans_category_id', $income_category)->sum('credit');
+        $transactions_chart['income'] = $transactions->where('trans_category_id', $income_category);
+        $transactions_chart['expenses'] = $transactions->where('trans_category_id', $purchase_category);
+        $transactions_chart['income_total'] = $transactions->where('trans_category_id', $income_category)->sum('credit');
 
-        $transactions_chart['expenses_total'] = $transactions->whereIn('trans_category_id', $purchase_category)->sum('debit');
+        $transactions_chart['expenses_total'] = $transactions->where('trans_category_id', $purchase_category)->sum('debit');
         $income_chart = array();
         foreach ($transactions_chart['income'] as $row_i) {
             $income_chart[] = array('x' => $row_i['payment_date'], 'y' => (int)$row_i['credit']);
