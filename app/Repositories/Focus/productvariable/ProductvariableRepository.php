@@ -42,8 +42,8 @@ class ProductvariableRepository extends BaseRepository
     public function create(array $input)
     {
         $input = array_map( 'strip_tags', $input);
-        if (Productvariable::create($input)) {
-            return true;
+        if ($productVariable = Productvariable::create($input)) {
+            return $productVariable;
         }
         throw new GeneralException(trans('exceptions.backend.productvariables.create_error'));
     }

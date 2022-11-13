@@ -44,7 +44,7 @@
                 <div class='form-group'>
                     {{ Form::label( 'email', trans('hrms.email'),['class' => 'col-lg-2 control-label']) }}
                     <div class='col-lg-10'>
-                        {{ Form::email('email', null, ['class' => 'form-control round', 'placeholder' => trans('hrms.email').'*','required'=>'required']) }}
+                        {{ Form::text('email', null, ['class' => 'form-control round', 'placeholder' => trans('hrms.email').'*','required'=>'required']) }}
                     </div>
                 </div>
                 <div class='form-group'>

@@ -127,13 +127,15 @@ class ProductRepository extends BaseRepository
             }
             if($input['main']['stock_type'] == 2) {
                 // dd($input['contains']['content_id']);
-                foreach($input['contains']['content_id'] as $key=>$contain) {
-                    if($contain != '') {
-                        ProductContains::create([
-                            'product_id'=>$product->id,
-                            'contain_id'=>$contain,
-                            'qty'=>$input['contains']['content_qty'][$key],
-                        ]);
+                if(isset($input['contains'])){
+                    foreach($input['contains']['content_id'] as $key=>$contain) {
+                        if($contain != '') {
+                            ProductContains::create([
+                                'product_id'=>$product->id,
+                                'contain_id'=>$contain,
+                                'qty'=>$input['contains']['content_qty'][$key],
+                            ]);
+                        }
                     }
                 }
             }

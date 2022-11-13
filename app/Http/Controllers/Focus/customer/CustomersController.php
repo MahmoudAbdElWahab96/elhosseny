@@ -31,7 +31,6 @@ use App\Http\Requests\Focus\customer\EditCustomerRequest;
 use App\Http\Requests\Focus\customer\DeleteCustomerRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
 
 /**
  * CustomersController
@@ -104,7 +103,7 @@ class CustomersController extends Controller
             ]);
         }
         if (empty($data['email'])) {
-            $data['email']='no_email_'. Str::random(4).'@'.Str::random(4);
+            $data['email']='no_email_'.Str::random(4).'@'.Str::random(4);
             $data['email']=strtolower($data['email']);
         }
         if (empty($data['phone'])) {

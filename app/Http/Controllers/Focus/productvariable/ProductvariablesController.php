@@ -77,12 +77,22 @@ class ProductvariablesController extends Controller
      */
     public function store(ManageCompanyRequest $request)
     {
-        //Input received from the request
-        $input = $request->except(['_token', 'ins']);
+        $input = $request->except(['_token', 'data']);
+
         $input['ins'] = auth()->user()->ins;
-        //Create the model using repository create method
-        if ($input['val'] < 1) $input['val'] = 1;
-        $this->repository->create($input);
+
+        $productVariable = $this->repository->create($input);
+
+        $variables = $request->data;
+        foreach($variables as $variable){
+            $data = [
+                'value' => $variable,
+                'ins' => auth()->user()->ins
+            ];
+
+            $productVariable->variationValues()->create($data);
+        }
+
         //return with successfull message
         return new RedirectResponse(route('biller.productvariables.index'), ['flash_success' => trans('alerts.backend.productvariables.created')]);
     }

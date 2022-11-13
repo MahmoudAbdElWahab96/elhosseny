@@ -107,7 +107,7 @@ class HrmRepository extends BaseRepository
         $input['profile']['user_id'] = $hrm->id;
         $input['meta']['user_id'] = $hrm->id;
         UserProfile::create($input['profile']);
-        $input['meta']['vacation'] = json_encode($input['meta']['vacation']??'');
+        $input['meta']['vacation'] = json_encode($input['meta']['vacation']);
 
         HrmMeta::create($input['meta']);
 

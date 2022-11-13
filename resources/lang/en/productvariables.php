@@ -1,7 +1,7 @@
 <?php
 return [
-'name'=>'Name Arabic',
-'name_en'=>'Name English',
+'name'=>'Name',
+'name_en'=>'Name',
 'code'=>'Code',
 'type'=>'Type',
 'val'=>'Value',
@@ -11,4 +11,6 @@ return [
 'productvariable'=>'Product Unit variable',
 'standard_type'=>'Standard Type - Single Unit',
 'multiple_type'=>'Multiple Type - Multiple Unit',
+'variable_value' => 'Value',
+'values' => 'Values'
 ];

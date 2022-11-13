@@ -27,9 +27,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-
                             <div class="card-content">
-
                                 <div class="card-body">
                                     <table id="productvariables-table"
                                            class="table table-striped table-bordered zero-configuration" cellspacing="0"
@@ -37,20 +35,14 @@
                                         <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>{{ trans('productvariables.code') }}</th>
                                             <th>{{ trans('productvariables.name') }}</th>
-                                            <th>{{ trans('productvariables.name_en') }}</th>
                                             <th>{{ trans('general.createdat') }}</th>
                                             <th>{{ trans('labels.general.actions') }}</th>
                                         </tr>
                                         </thead>
-
-
                                         <tbody></tbody>
                                     </table>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
@@ -84,9 +76,7 @@
                 },
                 columns: [
                     {data: 'DT_Row_Index', name: 'id'},
-                    {data: 'code', name: 'code'},
                     {data: 'name', name: 'name'},
-                    {data: 'name_en', name: 'name_en'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions', searchable: false, sortable: false}
                 ],

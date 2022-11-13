@@ -22,7 +22,6 @@ $horizon=feature(12)?feature(12)['value2']:'';
         var crsf_token = 'csrf-token';
         var crsf_hash = '{{ csrf_token() }}';
         window.Laravel = {!! json_encode([ 'csrfToken' => csrf_token() ]) !!};
-        var unit_load_data ={!!units() !!};
         var cur_dy='{{config('currency.symbol')}}';
     </script>
     <!-- BEGIN: Vendor CSS-->

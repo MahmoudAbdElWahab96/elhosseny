@@ -102,10 +102,7 @@ class ProductsController extends Controller
      */
     public function store(CreateProductRequest $request)
     {
-        $request->validate([
-            'warehouse_id' => 'required',
-        ]);
-        
+
         //Input received from the request
         $input['main'] = $request->only(['name', 'taxrate', 'product_des', 'productcategory_id', 'sub_cat_id', 'unit', 'code_type', 'stock_type']);
         $input['custom_field'] = $request->only(['custom_field']);

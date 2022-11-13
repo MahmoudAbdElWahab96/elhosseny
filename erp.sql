@@ -224,9 +224,17 @@ ALTER TABLE `rose_branches` ADD `is_active` TINYINT NOT NULL DEFAULT '0' AFTER `
 
 ALTER TABLE `rose_branches` CHANGE `country` `country` VARCHAR(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL, CHANGE `region` `region` VARCHAR(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL, CHANGE `city` `city` VARCHAR(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL, CHANGE `postbox` `postbox` VARCHAR(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL, CHANGE `phone` `phone` VARCHAR(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL, CHANGE `email` `email` VARCHAR(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL;
 
+####################################################################################33
+
+ALTER TABLE `rose_product_variables`
+  DROP `name_en`,
+  DROP `code`,
+  DROP `type`,
+  DROP `val`,
+  DROP `rid`;
 
 
 
-ALTER TABLE `rose_prefixes` DROP `branch_id`;
+  CREATE TABLE `elhosseny`.`rose_product_variable_values` (`id` INT NOT NULL AUTO_INCREMENT , `product_variable_id` INT NULL , `value` VARCHAR(256) NULL , `ins` INT NULL , `updated_at` TIMESTAMP NULL , `created_at` TIMESTAMP NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 
-ALTER TABLE `rose_config_meta` DROP `branch_id`;
+ALTER TABLE `rose_product_variable_values` ADD `branch_id` INT NULL AFTER `id`;

@@ -745,11 +745,11 @@ function user_data($id)
 }
 
 
-function units()
-{
-    $u = \App\Models\productvariable\Productvariable::where('type', '=', 1)->get(['id', 'name', 'code', 'val'])->toJson();
-    return $u;
-}
+// function units()
+// {
+//     $u = \App\Models\productvariable\Productvariable::where('type', '=', 1)->get(['id', 'name', 'code', 'val'])->toJson();
+//     return $u;
+// }
 
 function profit_calc($today=true,$date_from=null,$date_to=null)
 {

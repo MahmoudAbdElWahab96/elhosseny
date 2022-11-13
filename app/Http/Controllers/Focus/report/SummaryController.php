@@ -40,8 +40,8 @@ class SummaryController extends Controller
                 $lang['title'] = trans('meta.income_summary');
                 $lang['module'] = 'income';
                 if ($summary->calculate) {
-                    $income_category = ConfigMeta::withoutGlobalScopes()->where('feature_id', '=', 8)->first('feature_value');
-                    $income = Transaction::where('trans_category_id', json_decode($income_category['feature_value']))->whereBetween('payment_date', [datetime_for_database($summary->from_date), date_for_database_plus($summary->to_date)])->sum('credit');
+                    $income_category = ConfigMeta::where('feature_id', '=', 8)->first('value1');
+                    $income = Transaction::whereIn('trans_category_id', json_decode($income_category['value1']))->whereBetween('payment_date', [datetime_for_database($summary->from_date), date_for_database_plus($summary->to_date)])->sum('credit');
                     $lang['calculate'] = trans('meta.income_summary') . ' &nbsp; &nbsp; &nbsp;' . dateFormat($summary->from_date) . ' - ' . dateFormat($summary->to_date) . ' &nbsp; &nbsp; &nbsp;' . trans('general.total') . ' ' . amountFormat($income);
                 }
                 return view('focus.summary.summary', compact('lang'));
@@ -50,8 +50,8 @@ class SummaryController extends Controller
                 $lang['title'] = trans('meta.expense_summary');
                 $lang['module'] = 'expense';
                 if ($summary->calculate) {
-                    $income_category = ConfigMeta::withoutGlobalScopes()->where('feature_id', '=', 10)->first('feature_value');
-                    $income = Transaction::where('trans_category_id',json_decode($income_category['feature_value']))->whereBetween('payment_date', [datetime_for_database($summary->from_date), date_for_database_plus($summary->to_date)])->sum('debit');
+                    $income_category = ConfigMeta::where('feature_id', '=', 10)->first('value1');
+                    $income = Transaction::whereIn('trans_category_id',json_decode($income_category['value1']))->whereBetween('payment_date', [datetime_for_database($summary->from_date), date_for_database_plus($summary->to_date)])->sum('debit');
                     $lang['calculate'] = trans('meta.expense_summary') . ' &nbsp; &nbsp; &nbsp;' . dateFormat($summary->from_date) . ' - ' . dateFormat($summary->to_date) . ' &nbsp; &nbsp; &nbsp;' . trans('general.total') . ' ' . amountFormat($income);
                 }
                 return view('focus.summary.summary', compact('lang'));
