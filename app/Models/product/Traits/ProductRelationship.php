@@ -14,17 +14,17 @@ trait ProductRelationship
 
     public function standard()
     {
-        return $this->hasOne(ProductVariation::class)->where('parent_id', 0);
+        return $this->hasOne(ProductVariation::class);
     }
 
     public function variations()
     {
-        return $this->hasMany(ProductVariation::class)->where('parent_id', 1);
+        return $this->hasMany(ProductVariation::class);
     }
 
         public function variations_b()
     {
-        return $this->belongsTo(ProductVariation::class)->where('parent_id', 1);
+        return $this->belongsTo(ProductVariation::class);
     }
 
      public function category()

@@ -83,63 +83,43 @@ class ProductRepository extends BaseRepository
         $input['main']['product_des'] = $product_des;
         $product = Product::create($input['main']);
         if ($product->id) {
-            $variations = array();
-            $i = 0;
-            $std_p = 0;
-            foreach ($input['variation']['price'] as $key => $value) {
-
-                if (!empty($input['variation']['image'][$key])) {
-                    $input['variation']['image'][$key] = $this->uploadFile($input['variation']['image'][$key]);
+       
+                if (!empty($input['variation']['image'])) {
+                    $input['variation']['image'] = $this->uploadFile($input['variation']['image']);
                 } else {
-                    $input['variation']['image'][$key] = 'example.png';
-                }
-                if (!empty($input['variation']['expiry'][$key])) {
-                    if (strtotime(date_for_database($input['variation']['expiry'][$key])) > strtotime(date('Y-m-d'))) $input['variation']['expiry'][$key] = date_for_database($input['variation']['expiry'][$key]);
-                }
-                if (!$input['variation']['barcode'][$key]) $input['variation']['barcode'][$key] = rand(100, 999) . rand(0, 9) . rand(1000000, 9999999) . rand(0, 9);
-
-
-                if (!$i) {
-                    $std = array('product_id' => $product->id, 'parent_id' => 0, 'variation_class' => 0, 'name' => $input['variation']['variation_name'][$key], 'warehouse_id' => $input['variation']['warehouse_id'][$key], 'code' => $input['variation']['code'][$key], 'price' => numberClean($input['variation']['price'][$key]), 'purchase_price' => numberClean($input['variation']['purchase_price'][$key]), 'disrate' => numberClean($input['variation']['disrate'][$key]), 'qty' => numberClean($input['variation']['qty'][$key]), 'alert' => numberClean($input['variation']['alert'][$key]), 'image' => $input['variation']['image'][$key], 'barcode' => $input['variation']['barcode'][$key], 'expiry' => $input['variation']['expiry'][$key], 'ins' => $product->ins);
-                    $std = array_map('strip_tags', $std);
-                    $std_p = ProductVariation::create($std);
-                } else {
-
-                    $variations[] = array('product_id' => $product->id, 'parent_id' => 1, 'variation_class' => 0, 'name' => strip_tags($input['variation']['variation_name'][$key]), 'warehouse_id' => $input['variation']['warehouse_id'][$key], 'code' => $input['variation']['code'][$key], 'price' => numberClean($input['variation']['price'][$key]), 'purchase_price' => numberClean($input['variation']['purchase_price'][$key]), 'disrate' => numberClean($input['variation']['disrate'][$key]), 'qty' => numberClean($input['variation']['qty'][$key]), 'alert' => numberClean($input['variation']['alert'][$key]), 'image' => $input['variation']['image'][$key], 'barcode' => $input['variation']['barcode'][$key], 'expiry' => $input['variation']['expiry'][$key], 'ins' => $product->ins);
+                    $input['variation']['image'] = 'example.png';
                 }
 
-
-                $i++;
-            }
-
-
-            if (is_array($input['custom_field'])) {
-                if (ProductVariation::insert($variations)) {
-                    save_custom_field($input['custom_field'], $product->id, 3);
+                if (!empty($input['variation']['expiry'])) {
+                    if (strtotime(date_for_database($input['variation']['expiry'])) > strtotime(date('Y-m-d'))) $input['variation']['expiry'] = date_for_database($input['variation']['expiry']);
                 }
-            }
-            if (isset($input['serial']['product_serial'])) {
-                $serial = array();
-                foreach ($input['serial']['product_serial'] as $key => $value) {
-                    $serial[] = array('rel_type' => 2, 'rel_id' => 0, 'ref_id' => $std_p->id, 'value' => strip_tags($value));
+
+                if (!$input['variation']['barcode']){
+                    $input['variation']['barcode'] = rand(100, 999) . rand(0, 9) . rand(1000000, 9999999) . rand(0, 9);
                 }
-                ProductMeta::insert($serial);
-            }
-            if($input['main']['stock_type'] == 2) {
-                // dd($input['contains']['content_id']);
-                if(isset($input['contains'])){
-                    foreach($input['contains']['content_id'] as $key=>$contain) {
-                        if($contain != '') {
-                            ProductContains::create([
-                                'product_id'=>$product->id,
-                                'contain_id'=>$contain,
-                                'qty'=>$input['contains']['content_qty'][$key],
-                            ]);
-                        }
-                    }
-                }
-            }
+
+                $std = array(
+                    'product_id' => $product->id,
+                    'name' => $input['variation']['variation_name'],
+                    'warehouse_id' => $input['variation']['warehouse_id'],
+                    'code' => $input['variation']['code'],
+                    'price' => numberClean($input['variation']['price']),
+                    'purchase_price' => numberClean($input['variation']['purchase_price']),
+                    'disrate' => numberClean($input['variation']['disrate']),
+                    'qty' => numberClean($input['variation']['qty']),
+                    'alert' => numberClean($input['variation']['alert']),
+                    'image' => $input['variation']['image'],
+                    'barcode' => $input['variation']['barcode'],
+                    'expiry' => $input['variation']['expiry'],
+                    'ins' => $product->ins
+                );
+
+                $std = array_map('strip_tags', $std);
+                
+                $ProductVariation = ProductVariation::create($std);
+
             DB::commit();
+
             return $product->id;
         }
         throw new GeneralException(trans('exceptions.backend.products.create_error'));

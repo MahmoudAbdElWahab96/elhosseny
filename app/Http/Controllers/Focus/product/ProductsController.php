@@ -102,14 +102,10 @@ class ProductsController extends Controller
      */
     public function store(CreateProductRequest $request)
     {
-
         //Input received from the request
-        $input['main'] = $request->only(['name', 'taxrate', 'product_des', 'productcategory_id', 'sub_cat_id', 'unit', 'code_type', 'stock_type']);
-        $input['custom_field'] = $request->only(['custom_field']);
-        $input['serial'] = $request->only(['product_serial']);
+        $input['main'] = $request->only(['name', 'type', 'price', 'taxrate', 'product_des', 'productcategory_id', 'sub_cat_id']);
         $input['variation'] = $request->only(['v_id', 'price', 'purchase_price', 'qty', 'code', 'barcode', 'disrate', 'alert', 'expiry', 'warehouse_id', 'variation_name', 'image']);
         $input['main']['ins'] = auth()->user()->ins;
-        $input['custom_field']['ins'] = auth()->user()->ins;
         //Create the model using repository create method
         $id = $this->repository->create($input);
 

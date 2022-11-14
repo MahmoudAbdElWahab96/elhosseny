@@ -31,9 +31,4 @@ trait ProductVariationRelationship
     {
         return $this->hasOneThrough(Productcategory::class,Product::class,'product_id','productcategory_id');
     }
-
-
-
-
-
 }

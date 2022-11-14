@@ -20,9 +20,9 @@
             {{ Form::label( 'code', trans('products.code'),['class' => 'col control-label']) }}
             <div class='col'>
                 @if( $product_code && $product_code->is_require == 1)
-                    {{ Form::text('code[]', @$products->standard['code'], ['class' => 'form-control box-size', 'placeholder' => trans('products.code').'*','required'=>'required']) }}
+                    {{ Form::text('code', @$products->standard['code'], ['class' => 'form-control box-size', 'placeholder' => trans('products.code').'*','required'=>'required']) }}
                 @else
-                    {{ Form::text('code[]', @$products->standard['code'], ['class' => 'form-control box-size', 'placeholder' => trans('products.code')]) }}
+                    {{ Form::text('code', @$products->standard['code'], ['class' => 'form-control box-size', 'placeholder' => trans('products.code')]) }}
                 @endif
             </div>
         </div>
@@ -147,25 +147,11 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            {{ Form::label( 'unit', trans('products.unit'),['class' => 'col control-label']) }}
-            <div class='col'>
-                <select class="form-control" name="unit">
-                    @foreach($product_variable as $item)
-                        @if(!$item->type)
-                            <option value="{{$item->code}}" {{ $item->code === @$products->unit ? " selected" : "" }}>{{$item->name}}
-                                - {{$item->code}}</option>
-                        @endif
-                    @endforeach
-                </select>
-            </div>
-        </div>
-    </div>
+ 
 </div>
 
 
-<hr class="mb-5">
+<!-- <hr class="mb-5">
 <div class="row product_content" style="{{@$products->stock_type !==2 ? 'display: none' : ''}}">
     <div class='col-md-12'>
         <div class="row">
@@ -183,7 +169,7 @@
                 <div class='col-md-12'>
                     <div class='form-group'>
                         <label for='content_id'>{{trans('products.name')}}</label>
-                        <select class='form-control products select-box' name='content_id[]'>
+                        <select class='form-control products select-box' name='content_id'>
                             <option value=''>Select product</option>
                             @foreach ($productVariation as $product)
                                 <option value='{{$product->product_id}}' {{$item->contain_id == $product->product_id ? 'selected' : ''}}>{{$product->product->name}}</option>
@@ -194,14 +180,14 @@
                 <div class='col-md-12'>
                     <div class='form-group'>
                         <label class='col control-label'>{{trans('products.qty')}}</label>
-                        <input type='text' value='{{$item->qty}}' name='content_qty[]' class='form-control box-size'>
+                        <input type='text' value='{{$item->qty}}' name='content_qty' class='form-control box-size'>
                     </div>
                 </div>
             @endforeach
         @endif
     </div>
     <hr class="mb-5">
-</div>
+</div> -->
 
 <div class="row">
     <div class='col-lg-10'>
@@ -219,126 +205,16 @@
     </div>
 </div>
 <br/><br/>
-<div id="normal_product" style="display: none;">
+<div id="main_product" style="display: none;">
     <div class="product round">
-        <div class="row mt-1 mb-1">
-            <div class="col-md-12">
-                <div class='form-group'>
-                    {{ Form::label( 'variation_name', trans('general.description'),['class' => 'col control-label']) }}
-                    <div class='col-6'>
-                        {{ Form::text('variation_name[]',@$products->standard['name'], ['class' => 'form-control box-size', 'placeholder' => trans('general.description')]) }}
-                    </div>
-
-                </div>
-            </div>
-            <div class="old_id"><input
-                        type="hidden" name="v_id[]" value="{{@$products->standard['id']}}"><input
-                        type="hidden" name="pv_id" value="{{@$products->standard['id']}}"></div>
-
-
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class='form-group'>
-                    {{ Form::label( 'price', trans('products.price'),['class' => 'col control-label']) }}
-                    <div class='col'>
-                        {{ Form::text('price[]', numberFormat(@$products->standard['price']), ['class' => 'form-control box-size', 'placeholder' => trans('products.price').'*','required'=>'required','onkeypress'=>"return isNumber(event)"]) }}
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class='form-group'>
-                    {{ Form::label( 'purchase_price', trans('products.purchase_price'),['class' => 'col control-label']) }}
-                    <div class='col'>
-                        {{ Form::text('purchase_price[]', numberFormat(@$products->standard['purchase_price']), ['class' => 'form-control box-size', 'placeholder' => trans('products.purchase_price'),'onkeypress'=>"return isNumber(event)"]) }}
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class='form-group'>
-                    {{ Form::label( 'qty', trans('products.qty'),['class' => 'col control-label']) }}
-                    <div class='col'>
-                        {{ Form::text('qty[]', numberFormat(@$products->standard['qty']), ['class' => 'form-control box-size', 'placeholder' => trans('products.qty'),'onkeypress'=>"return isNumber(event)"]) }}
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-4">
-                <div class="form-group">
-                    {{ Form::label( 'productcategory_id', trans('products.warehouse_id'),['class' => 'col control-label']) }}
-                    <div class='col'>
-                        <select class="form-control" name="warehouse_id[]">
-
-                            @foreach($warehouses as $item)
-                                <option value="{{$item->id}}" {{ $item->id === @$products->warehouse_id ? " selected" : "" }}>{{$item->title}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class='form-group'>
-                    {{ Form::label( 'barcode', trans('products.barcode'),['class' => 'col control-label']) }}
-                    <div class='col'>
-                        {{ Form::text('barcode[]', @$products->standard['barcode'], ['class' => 'form-control box-size', 'placeholder' => trans('products.barcode')]) }}
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-4">
-                <div class='form-group'>
-                    {{ Form::label( 'disrate', trans('products.disrate'),['class' => 'col control-label']) }}
-                    <div class='col'>
-                        {{ Form::text('disrate[]', numberFormat(@$products->standard['disrate']), ['class' => 'form-control box-size', 'placeholder' => trans('products.disrate'),'onkeypress'=>"return isNumber(event)"]) }}
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class='form-group'>
-                    {{ Form::label( 'alert', trans('products.alert'),['class' => 'col control-label']) }}
-                    <div class='col'>
-                        {{ Form::text('alert[]', numberFormat(@$products->standard['alert']), ['class' => 'form-control box-size', 'placeholder' => trans('products.alert'),'onkeypress'=>"return isNumber(event)"]) }}
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class='form-group'>
-                    {{ Form::label( 'expiry', trans('products.expiry'),['class' => 'col control-label']) }}
-                    <div class='col'>
-                        {{ Form::text('expiry[]', dateFormat(@$products->standard['expiry']), ['class' => 'form-control box-size', 'placeholder' => trans('products.expiry'),'data-toggle'=>'datepicker','autocomplete'=>'false']) }}
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6">
-                <div class='form-group'>
-                    {{ Form::label( 'image', trans('products.image'),['class' => 'col control-label']) }}
-                    <div class='col'>
-                        {!! Form::file('image[]', array('class'=>'input' )) !!}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <span class="col-6 del_b"></span>
-        <hr>
-    </div>
-</div>
-
-<div id="variable_product" style="display: none;">
-    <div class="product round">
-        <div class="row">
+        <div class="row" id="variable_product" style="display:none;">
             @foreach($productVariables as $key => $productVariable)
                 <div class="col-md-4">
                     <div class='form-group'>
                         {{ Form::label( 'price', $productVariable->name ,['class' => 'col control-label']) }}
                         <div class='col'>
                             <select class="form-control" name="product_variable_value_id">
+                                <option value=""></option>
                                 @foreach($productVariable->variationValues as $item)
                                     <option value="{{$item->id}}">{{$item->value}}</option>
                                 @endforeach
@@ -349,12 +225,28 @@
             @endforeach    
         </div>
 
+        <div class="row mt-1 mb-1">
+            <div class="col-md-12">
+                <div class='form-group'>
+                    {{ Form::label( 'variation_name', trans('general.description'),['class' => 'col control-label']) }}
+                    <div class='col-6'>
+                        {{ Form::text('variation_name',@$products->standard['name'], ['class' => 'form-control box-size', 'placeholder' => trans('general.description')]) }}
+                    </div>
+
+                </div>
+            </div>
+            <div class="old_id"><input
+                        type="hidden" name="v_id" value="{{@$products->standard['id']}}"><input
+                        type="hidden" name="pv_id" value="{{@$products->standard['id']}}"></div>
+
+
+        </div>
         <div class="row">
             <div class="col-md-4">
                 <div class='form-group'>
                     {{ Form::label( 'price', trans('products.price'),['class' => 'col control-label']) }}
                     <div class='col'>
-                        {{ Form::text('price[]', numberFormat(@$products->standard['price']), ['class' => 'form-control box-size', 'placeholder' => trans('products.price').'*','required'=>'required','onkeypress'=>"return isNumber(event)"]) }}
+                        {{ Form::text('price', numberFormat(@$products->standard['price']), ['class' => 'form-control box-size', 'placeholder' => trans('products.price').'*','required'=>'required','onkeypress'=>"return isNumber(event)"]) }}
                     </div>
                 </div>
             </div>
@@ -362,7 +254,7 @@
                 <div class='form-group'>
                     {{ Form::label( 'purchase_price', trans('products.purchase_price'),['class' => 'col control-label']) }}
                     <div class='col'>
-                        {{ Form::text('purchase_price[]', numberFormat(@$products->standard['purchase_price']), ['class' => 'form-control box-size', 'placeholder' => trans('products.purchase_price'),'onkeypress'=>"return isNumber(event)"]) }}
+                        {{ Form::text('purchase_price', numberFormat(@$products->standard['purchase_price']), ['class' => 'form-control box-size', 'placeholder' => trans('products.purchase_price'),'onkeypress'=>"return isNumber(event)"]) }}
                     </div>
                 </div>
             </div>
@@ -370,34 +262,18 @@
                 <div class='form-group'>
                     {{ Form::label( 'qty', trans('products.qty'),['class' => 'col control-label']) }}
                     <div class='col'>
-                        {{ Form::text('qty[]', numberFormat(@$products->standard['qty']), ['class' => 'form-control box-size', 'placeholder' => trans('products.qty'),'onkeypress'=>"return isNumber(event)"]) }}
+                        {{ Form::text('qty', numberFormat(@$products->standard['qty']), ['class' => 'form-control box-size', 'placeholder' => trans('products.qty'),'onkeypress'=>"return isNumber(event)"]) }}
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="row mt-1 mb-1">
-            <div class="col-md-12">
-                <div class='form-group'>
-                    {{ Form::label( 'variation_name', trans('general.description'),['class' => 'col control-label']) }}
-                    <div class='col-6'>
-                        {{ Form::text('variation_name[]',@$products->standard['name'], ['class' => 'form-control box-size', 'placeholder' => trans('general.description')]) }}
-                    </div>
-                </div>
-            </div>
-            <div class="old_id">
-                <input type="hidden" name="v_id[]" value="{{@$products->standard['id']}}">
-                <input type="hidden" name="pv_id" value="{{@$products->standard['id']}}">
-            </div>
-        </div>
-      
 
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
                     {{ Form::label( 'productcategory_id', trans('products.warehouse_id'),['class' => 'col control-label']) }}
                     <div class='col'>
-                        <select class="form-control" name="warehouse_id[]">
+                        <select class="form-control" name="warehouse_id">
 
                             @foreach($warehouses as $item)
                                 <option value="{{$item->id}}" {{ $item->id === @$products->warehouse_id ? " selected" : "" }}>{{$item->title}}</option>
@@ -410,7 +286,7 @@
                 <div class='form-group'>
                     {{ Form::label( 'barcode', trans('products.barcode'),['class' => 'col control-label']) }}
                     <div class='col'>
-                        {{ Form::text('barcode[]', @$products->standard['barcode'], ['class' => 'form-control box-size', 'placeholder' => trans('products.barcode')]) }}
+                        {{ Form::text('barcode', @$products->standard['barcode'], ['class' => 'form-control box-size', 'placeholder' => trans('products.barcode')]) }}
                     </div>
                 </div>
             </div>
@@ -421,7 +297,7 @@
                 <div class='form-group'>
                     {{ Form::label( 'disrate', trans('products.disrate'),['class' => 'col control-label']) }}
                     <div class='col'>
-                        {{ Form::text('disrate[]', numberFormat(@$products->standard['disrate']), ['class' => 'form-control box-size', 'placeholder' => trans('products.disrate'),'onkeypress'=>"return isNumber(event)"]) }}
+                        {{ Form::text('disrate', numberFormat(@$products->standard['disrate']), ['class' => 'form-control box-size', 'placeholder' => trans('products.disrate'),'onkeypress'=>"return isNumber(event)"]) }}
                     </div>
                 </div>
             </div>
@@ -429,7 +305,7 @@
                 <div class='form-group'>
                     {{ Form::label( 'alert', trans('products.alert'),['class' => 'col control-label']) }}
                     <div class='col'>
-                        {{ Form::text('alert[]', numberFormat(@$products->standard['alert']), ['class' => 'form-control box-size', 'placeholder' => trans('products.alert'),'onkeypress'=>"return isNumber(event)"]) }}
+                        {{ Form::text('alert', numberFormat(@$products->standard['alert']), ['class' => 'form-control box-size', 'placeholder' => trans('products.alert'),'onkeypress'=>"return isNumber(event)"]) }}
                     </div>
                 </div>
             </div>
@@ -437,7 +313,7 @@
                 <div class='form-group'>
                     {{ Form::label( 'expiry', trans('products.expiry'),['class' => 'col control-label']) }}
                     <div class='col'>
-                        {{ Form::text('expiry[]', dateFormat(@$products->standard['expiry']), ['class' => 'form-control box-size', 'placeholder' => trans('products.expiry'),'data-toggle'=>'datepicker','autocomplete'=>'false']) }}
+                        {{ Form::text('expiry', dateFormat(@$products->standard['expiry']), ['class' => 'form-control box-size', 'placeholder' => trans('products.expiry'),'data-toggle'=>'datepicker','autocomplete'=>'false']) }}
                     </div>
                 </div>
             </div>
@@ -448,7 +324,7 @@
                 <div class='form-group'>
                     {{ Form::label( 'image', trans('products.image'),['class' => 'col control-label']) }}
                     <div class='col'>
-                        {!! Form::file('image[]', array('class'=>'input' )) !!}
+                        {!! Form::file('image', array('class'=>'input' )) !!}
                     </div>
                 </div>
             </div>
@@ -484,7 +360,7 @@
     <script type="text/javascript">
         $(".products").select2();
         function addNewContent() {
-            $("#product_content").append("<div class='col-md-12'><div class='form-group'><label for='content_id'>{{trans('products.name')}}</label><select class='form-control products' name='content_id[]'><option value=''>Select product</option>@foreach ($productVariation as $product)<option value='{{$product->product_id}}'>{{$product->product->name}}</option>@endforeach</select></div></div><div class='col-md-12'><div class='form-group'><label class='col control-label'>{{trans('products.qty')}}</label><input type='text' value='1' name='content_qty[]' class='form-control box-size'></div></div>");
+            $("#product_content").append("<div class='col-md-12'><div class='form-group'><label for='content_id'>{{trans('products.name')}}</label><select class='form-control products' name='content_id'><option value=''>Select product</option>@foreach ($productVariation as $product)<option value='{{$product->product_id}}'>{{$product->product->name}}</option>@endforeach</select></div></div><div class='col-md-12'><div class='form-group'><label class='col control-label'>{{trans('products.qty')}}</label><input type='text' value='1' name='content_qty' class='form-control box-size'></div></div>");
             $('.products').select2();
         }
         function change_product_stock() {
@@ -510,17 +386,16 @@
         $(document).on('click', ".add_serial", function (e) {
             e.preventDefault();
 
-            $('#added_product').append('<div class="form-group serial"><label for="field_s" class="col-lg-2 control-label">{{trans('products.product_serial')}}</label><div class="col-lg-10"><input class="form-control box-size" placeholder="{{trans('products.product_serial')}}" name="product_serial[]" type="text"  value=""></div><button class="btn-sm btn-purple v_delete_serial m-1 align-content-end"><i class="fa fa-trash"></i> </button></div>');
+            $('#added_product').append('<div class="form-group serial"><label for="field_s" class="col-lg-2 control-label">{{trans('products.product_serial')}}</label><div class="col-lg-10"><input class="form-control box-size" placeholder="{{trans('products.product_serial')}}" name="product_serial" type="text"  value=""></div><button class="btn-sm btn-purple v_delete_serial m-1 align-content-end"><i class="fa fa-trash"></i> </button></div>');
 
         });
 
         function getProductValue(sel){
 
             if(sel.value == 'normal'){
-                $('#normal_product').css('display', 'block');
+                $('#main_product').css('display', 'block');
                 $('#variable_product').css('display', 'none');
             }else if(sel.value == 'variable'){
-                $('#normal_product').css('display', 'none');
                 $('#variable_product').css('display', 'block');
             }
         }
