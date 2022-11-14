@@ -392,23 +392,6 @@
                                 <h4 class="card-title">{{trans('dashboard.stock_alert')}}</h4>
 
                             </div>
-                            <div class="card-body">
-                                <ul class="list-group list-group-flush">
-
-                                    @foreach ($data['stock_alert'] as $product)
-
-                                        <li class="list-group-item"><span
-                                                    class="badge badge-danger float-xs-right">{{+$product['qty']}} {{$product->product['unit']}}</span>
-                                            <a href="{{route('biller.products.show',[$product->product_id])}}">{{$product->product['name']}} {{$product['name']}}   </a><small
-                                                    class="purple"> <i
-                                                        class="ft-map-pin"></i>{{$product->warehouse['title']}}</small>
-                                        </li>
-
-                                    @endforeach
-
-                                </ul>
-
-                            </div>
                         </div>
                     </div>
                 </div>

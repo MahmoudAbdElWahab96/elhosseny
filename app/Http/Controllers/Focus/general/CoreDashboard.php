@@ -44,9 +44,9 @@ class CoreDashboard extends Controller
             $data['customers'] = $invoice->groupBy('customer_id')->get();
             //  dd($data['customers']->pluck('customer_id')->toArray());
             $transactions = Transaction::with(['account'])->whereBetween('payment_date', [$start_date, $today])->orderBy('id', 'desc')->take(10)->get();
-            $data['stock_alert'] = ProductVariation::whereRaw('qty<=alert')->whereHas('product', function ($query) {
-                return $query->where('stock_type', '=', 1);
-            })->orderBy('id', 'desc')->take(10)->get();
+            // $data['stock_alert'] = ProductVariation::whereRaw('qty<=alert')->whereHas('product', function ($query) {
+            //     return $query->where('stock_type', '=', 1);
+            // })->orderBy('id', 'desc')->take(10)->get();
 
             $cates=\App\Models\transactioncategory\Transactioncategory::all();
             $income_cat=array();

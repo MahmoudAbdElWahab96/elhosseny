@@ -7,6 +7,7 @@ use App\Models\hrm\Hrm;
 use App\Models\Notification\Notification;
 use App\Models\product\Product;
 use App\Models\product\ProductVariation;
+use App\Models\productvariable\Productvariable;
 use App\Models\Settings\Setting;
 use App\Models\settings\SettingsRequiredFields;
 use App\Models\tag\Tag;
@@ -622,8 +623,9 @@ function product_helper()
     $product_gs_code = SettingsRequiredFields::where('model_type', Product::class)->where('field', 'gs_code')->select(['is_require'])->first();
     $product_egs_code = SettingsRequiredFields::where('model_type', Product::class)->where('field', 'egs_code')->select(['is_require'])->first();
     $product_name = SettingsRequiredFields::where('model_type', Product::class)->where('field', 'name')->select(['is_require'])->first();
+    $productVariables = Productvariable::with('variationValues')->get();
 
-    return compact('product_code','product_gs_code','product_egs_code','product_name','warehouses', 'product_category', 'product_variable', 'fields', 'productVariation');
+    return compact('productVariables','product_code','product_gs_code','product_egs_code','product_name','warehouses', 'product_category', 'product_variable', 'fields', 'productVariation');
 }
 
 function prefix($value, $public = false)

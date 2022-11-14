@@ -25,6 +25,7 @@ use App\Http\Responses\RedirectResponse;
 use App\Http\Responses\ViewResponse;
 use App\Http\Responses\Focus\productvariable\CreateResponse;
 use App\Http\Responses\Focus\productvariable\EditResponse;
+use App\Models\productvariableValues\ProductvariableValues;
 use App\Repositories\Focus\productvariable\ProductvariableRepository;
 
 /**
@@ -136,9 +137,10 @@ class ProductvariablesController extends Controller
      */
     public function destroy(Productvariable $productvariable, ManageCompanyRequest $request)
     {
+        $productvariable->variationValues()->delete();        
         //Calling the delete method on repository
         $this->repository->delete($productvariable);
-        //returning with successfull message
+       //returning with successfull message
         return new RedirectResponse(route('biller.productvariables.index'), ['flash_success' => trans('alerts.backend.productvariables.deleted')]);
     }
 

@@ -1,5 +1,6 @@
 <?php
 return [
+'product_type' => 'نوع المنتج',
 'productcategory_id'=>'فئة المنتج',
 'warehouse_id'=>'مستودع',
 'name'=>'اسم العنصر',

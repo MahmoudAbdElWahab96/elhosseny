@@ -235,6 +235,23 @@ ALTER TABLE `rose_product_variables`
 
 
 
-  CREATE TABLE `elhosseny`.`rose_product_variable_values` (`id` INT NOT NULL AUTO_INCREMENT , `product_variable_id` INT NULL , `value` VARCHAR(256) NULL , `ins` INT NULL , `updated_at` TIMESTAMP NULL , `created_at` TIMESTAMP NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+  CREATE TABLE `rose_product_variable_values` (`id` INT NOT NULL AUTO_INCREMENT , `product_variable_id` INT NULL , `value` VARCHAR(256) NULL , `ins` INT NULL , `updated_at` TIMESTAMP NULL , `created_at` TIMESTAMP NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 
 ALTER TABLE `rose_product_variable_values` ADD `branch_id` INT NULL AFTER `id`;
+
+ALTER TABLE `rose_products`
+  DROP `unit`,
+  DROP `code_type`,
+  DROP `stock_type`;
+
+ALTER TABLE `rose_products` ADD `type` VARCHAR(256) NULL AFTER `name`;
+
+ALTER TABLE `rose_products` ADD `price` DOUBLE NULL AFTER `type`;
+
+ALTER TABLE `rose_product_variations`
+  DROP `parent_id`,
+  DROP `variation_class`;
+
+  CREATE TABLE `rose_product_variations_values` (`id` INT NOT NULL AUTO_INCREMENT , `product_variation_id` INT NULL , `product_variable_value_id` INT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+ALTER TABLE `rose_products` CHANGE `type` `type` ENUM('normal','variable') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL;

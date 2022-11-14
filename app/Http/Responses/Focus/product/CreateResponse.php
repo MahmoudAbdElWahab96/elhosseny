@@ -3,6 +3,7 @@
 namespace App\Http\Responses\Focus\product;
 
 use App\Models\customfield\Customfield;
+use App\Models\productvariable\Productvariable;
 use Illuminate\Contracts\Support\Responsable;
 
 class CreateResponse implements Responsable
