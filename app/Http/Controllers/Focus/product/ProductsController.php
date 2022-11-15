@@ -106,6 +106,8 @@ class ProductsController extends Controller
         $input['main'] = $request->only(['name', 'type', 'price', 'taxrate', 'product_des', 'productcategory_id', 'sub_cat_id']);
         $input['variation'] = $request->only(['v_id', 'price', 'purchase_price', 'qty', 'code', 'barcode', 'disrate', 'alert', 'expiry', 'warehouse_id', 'variation_name', 'image']);
         $input['main']['ins'] = auth()->user()->ins;
+        $input['variables'] = $request->only('product_variable_value_id');
+        
         //Create the model using repository create method
         $id = $this->repository->create($input);
 

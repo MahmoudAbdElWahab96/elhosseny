@@ -213,7 +213,7 @@
                     <div class='form-group'>
                         {{ Form::label( 'price', $productVariable->name ,['class' => 'col control-label']) }}
                         <div class='col'>
-                            <select class="form-control" name="product_variable_value_id">
+                            <select class="form-control" name="product_variable_value_id[]">
                                 <option value=""></option>
                                 @foreach($productVariable->variationValues as $item)
                                     <option value="{{$item->id}}">{{$item->value}}</option>

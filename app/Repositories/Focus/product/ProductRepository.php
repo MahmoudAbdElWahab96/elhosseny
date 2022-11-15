@@ -118,6 +118,17 @@ class ProductRepository extends BaseRepository
                 
                 $ProductVariation = ProductVariation::create($std);
 
+                $valuesData = [];
+
+                foreach($input['variables']['product_variable_value_id'] as $key => $value){
+                    $valuesData = [
+                        'product_variable_value_id' =>  $value,
+                        'product_variation_id' =>  $ProductVariation->id
+                    ];
+
+                    DB::table('product_variations_values')->insert($valuesData);
+                }   
+                
             DB::commit();
 
             return $product->id;
