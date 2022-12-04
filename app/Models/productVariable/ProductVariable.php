@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Models\productvariable;
+namespace App\Models\productVariable;
 
 use App\Models\ModelTrait;
+use App\Models\productVariable\Traits\BelongsToBranch;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\productvariable\Traits\ProductvariableAttribute;
-use App\Models\productvariable\Traits\ProductvariableRelationship;
+use App\Models\productVariable\Traits\ProductVariableAttribute;
+use App\Models\productVariable\Traits\ProductVariableRelationship;
 
-class Productvariable extends Model
+class ProductVariable extends Model
 {
-    use ModelTrait,
-        ProductvariableAttribute,
-    	ProductvariableRelationship {
-            // ProductvariableAttribute::getEditButtonAttribute insteadof ModelTrait;
+    use BelongsToBranch,ModelTrait,
+        ProductVariableAttribute,
+    	ProductVariableRelationship {
+            // ProductVariableAttribute::getEditButtonAttribute insteadof ModelTrait;
         }
 
     /**
@@ -24,7 +25,7 @@ class Productvariable extends Model
      * The database table used by the model.
      * @var string
      */
-    protected $table = 'product_variables';
+    protected $table = 'product_variabls';
 
     /**
      * Mass Assignable fields of model

@@ -25,7 +25,6 @@ use App\Http\Responses\RedirectResponse;
 use App\Http\Responses\ViewResponse;
 use App\Http\Responses\Focus\productvariable\CreateResponse;
 use App\Http\Responses\Focus\productvariable\EditResponse;
-use App\Models\productvariableValues\ProductvariableValues;
 use App\Repositories\Focus\productvariable\ProductvariableRepository;
 
 /**
@@ -78,22 +77,12 @@ class ProductvariablesController extends Controller
      */
     public function store(ManageCompanyRequest $request)
     {
-        $input = $request->except(['_token', 'data']);
-
+        //Input received from the request
+        $input = $request->except(['_token', 'ins']);
         $input['ins'] = auth()->user()->ins;
-
-        $productVariable = $this->repository->create($input);
-
-        $variables = $request->data;
-        foreach($variables as $variable){
-            $data = [
-                'value' => $variable,
-                'ins' => auth()->user()->ins
-            ];
-
-            $productVariable->variationValues()->create($data);
-        }
-
+        //Create the model using repository create method
+        if ($input['val'] < 1) $input['val'] = 1;
+        $this->repository->create($input);
         //return with successfull message
         return new RedirectResponse(route('biller.productvariables.index'), ['flash_success' => trans('alerts.backend.productvariables.created')]);
     }
@@ -137,10 +126,9 @@ class ProductvariablesController extends Controller
      */
     public function destroy(Productvariable $productvariable, ManageCompanyRequest $request)
     {
-        $productvariable->variationValues()->delete();        
         //Calling the delete method on repository
         $this->repository->delete($productvariable);
-       //returning with successfull message
+        //returning with successfull message
         return new RedirectResponse(route('biller.productvariables.index'), ['flash_success' => trans('alerts.backend.productvariables.deleted')]);
     }
 

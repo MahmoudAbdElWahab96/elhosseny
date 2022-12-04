@@ -255,3 +255,9 @@ ALTER TABLE `rose_product_variations`
   CREATE TABLE `rose_product_variations_values` (`id` INT NOT NULL AUTO_INCREMENT , `product_variation_id` INT NULL , `product_variable_value_id` INT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 
 ALTER TABLE `rose_products` CHANGE `type` `type` ENUM('normal','variable') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL;
+
+
+
+RENAME TABLE `elhosseny`.`rose_product_variables` TO `elhosseny`.`rose_product_variabls`;
+
+CREATE TABLE `rose_product_variables` ( `id` int(11) NOT NULL AUTO_INCREMENT, `branch_id` int(11) DEFAULT NULL, `name` varchar(20) NOT NULL, `ins` int(4) unsigned NOT NULL DEFAULT 0, `created_at` timestamp NOT NULL DEFAULT current_timestamp(), `updated_at` timestamp NOT NULL DEFAULT current_timestamp(), PRIMARY KEY (`id`) USING BTREE, KEY `ins` (`ins`) USING BTREE, CONSTRAINT `rose_product_variabels_ibfk_1` FOREIGN KEY (`ins`) REFERENCES `rose_companies` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;

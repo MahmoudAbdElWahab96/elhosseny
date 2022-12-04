@@ -12,9 +12,4 @@ trait ProductvariableRelationship
         return $this->belongsTo('App\Models\productvariable\Productvariable','id','sub');
     }
 
-    public function variationValues() {
-
-        return $this->hasMany('App\Models\productvariableValues\ProductvariableValues', 'product_variable_id', 'id');
-    }
-
 }

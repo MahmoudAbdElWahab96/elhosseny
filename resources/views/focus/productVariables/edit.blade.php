@@ -1,11 +1,11 @@
 @extends ('core.layouts.app')
 
-@section ('title', trans('labels.backend.productvariables.management') . ' | ' . trans('labels.backend.productvariables.create'))
+@section ('title', trans('labels.backend.productvariables.management') . ' | ' . trans('labels.backend.productvariables.edit'))
 
 @section('page-header')
     <h1>
         {{ trans('labels.backend.productvariables.management') }}
-        <small>{{ trans('labels.backend.productvariables.create') }}</small>
+        <small>{{ trans('labels.backend.productvariables.edit') }}</small>
     </h1>
 @endsection
 
@@ -14,14 +14,14 @@
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
-                    <h4 class="content-header-title mb-0">{{ trans('labels.backend.productvariables.create') }}</h4>
+                    <h4 class="content-header-title mb-0">{{ trans('labels.backend.productvariables.edit') }}</h4>
 
                 </div>
                 <div class="content-header-right col-md-6 col-12">
                     <div class="media width-250 float-right">
 
                         <div class="media-body media-right text-right">
-                            @include('focus.productvariables.partials.productvariables-header-buttons')
+                            @include('focus.productVariables.partials.product-variables-header-buttons')
                         </div>
                     </div>
                 </div>
@@ -34,18 +34,17 @@
                             <div class="card-content">
 
                                 <div class="card-body">
-                                    {{ Form::open(['route' => 'biller.productvariables.store', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post', 'id' => 'create-productvariable']) }}
-
+                                    {{ Form::model($productVariables, ['route' => ['biller.product-variables.update', $productVariables], 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'PATCH', 'id' => 'edit-productVariable']) }}
 
                                     <div class="form-group">
                                         {{-- Including Form blade file --}}
-                                        @include("focus.productvariables.form")
+                                        @include("focus.productVariables.form")
                                         <div class="edit-form-btn">
-                                            {{ link_to_route('biller.productvariables.index', trans('buttons.general.cancel'), [], ['class' => 'btn btn-danger btn-md']) }}
-                                            {{ Form::submit(trans('buttons.general.crud.create'), ['class' => 'btn btn-primary btn-md']) }}
+                                            {{ link_to_route('biller.product-variables.index', trans('buttons.general.cancel'), [], ['class' => 'btn btn-danger btn-md']) }}
+                                            {{ Form::submit(trans('buttons.general.crud.update'), ['class' => 'btn btn-primary btn-md']) }}
                                             <div class="clearfix"></div>
                                         </div><!--edit-form-btn-->
-                                    </div><!-- form-group -->
+                                    </div><!--form-group-->
 
                                     {{ Form::close() }}
                                 </div>

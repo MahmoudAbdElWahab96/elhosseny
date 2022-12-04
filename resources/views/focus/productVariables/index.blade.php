@@ -18,7 +18,7 @@
                     <div class="media width-250 float-right">
 
                         <div class="media-body media-right text-right">
-                            @include('focus.productvariables.partials.productvariables-header-buttons')
+                            @include('focus.productVariables.partials.product-variables-header-buttons')
                         </div>
                     </div>
                 </div>
@@ -27,11 +27,9 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-
                             <div class="card-content">
-
                                 <div class="card-body">
-                                    <table id="productvariables-table"
+                                    <table id="productVariables-table"
                                            class="table table-striped table-bordered zero-configuration" cellspacing="0"
                                            width="100%">
                                         <thead>
@@ -42,13 +40,9 @@
                                             <th>{{ trans('labels.general.actions') }}</th>
                                         </tr>
                                         </thead>
-
-
                                         <tbody></tbody>
                                     </table>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
@@ -69,7 +63,7 @@
                 }
             });
 
-            var dataTable = $('#productvariables-table').dataTable({
+            var dataTable = $('#productVariables-table').dataTable({
                 processing: true,
                 serverSide: true,
                 responsive: true,
@@ -77,7 +71,7 @@
                     @lang('datatable.strings')
                 },
                 ajax: {
-                    url: '{{ route("biller.productvariables.get") }}',
+                    url: '{{ route("biller.productVariable.get") }}',
                     type: 'post'
                 },
                 columns: [
@@ -98,7 +92,7 @@
                     ]
                 }
             });
-            $('#productvariables-table_wrapper').removeClass('form-inline');
+            $('#productVariables-table_wrapper').removeClass('form-inline');
 
         });
     </script>

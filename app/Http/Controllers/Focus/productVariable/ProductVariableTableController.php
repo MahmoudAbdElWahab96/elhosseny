@@ -15,53 +15,53 @@
  *  * here- http://codecanyon.net/licenses/standard/
  * ***********************************************************************
  */
-namespace App\Http\Controllers\Focus\productvariable;
+namespace App\Http\Controllers\Focus\productVariable;
 
 use App\Http\Requests\Focus\general\ManageCompanyRequest;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Yajra\DataTables\Facades\DataTables;
-use App\Repositories\Focus\productvariable\ProductvariableRepository;
-use App\Http\Requests\Focus\productvariable\ManageProductvariableRequest;
+use App\Repositories\Focus\productVariable\ProductVariableRepository;
+use App\Http\Requests\Focus\productVariable\ManageProductVariableRequest;
 
 /**
- * Class ProductvariablesTableController.
+ * Class ProductVariableTableController.
  */
-class ProductvariablesTableController extends Controller
+class ProductVariableTableController extends Controller
 {
     /**
      * variable to store the repository object
-     * @var ProductvariableRepository
+     * @var ProductVariableRepository
      */
-    protected $productvariable;
+    protected $productVariable;
 
     /**
      * contructor to initialize repository object
-     * @param ProductvariableRepository $productvariable ;
+     * @param ProductVariableRepository $productVariable ;
      */
-    public function __construct(ProductvariableRepository $productvariable)
+    public function __construct(ProductVariableRepository $productVariable)
     {
-        $this->productvariable = $productvariable;
+        $this->productVariable = $productVariable;
     }
 
     /**
      * This method return the data of the model
-     * @param ManageProductvariableRequest $request
+     * @param ManageProductVariableRequest $request
      *
      * @return mixed
      */
     public function __invoke(ManageCompanyRequest $request)
     {
         //
-        $core = $this->productvariable->getForDataTable();
+        $core = $this->productVariable->getForDataTable();
         return Datatables::of($core)
             ->escapeColumns(['id'])
             ->addIndexColumn()
-            ->addColumn('created_at', function ($productvariable) {
-                return Carbon::parse($productvariable->created_at)->toDateString();
+            ->addColumn('created_at', function ($productVariable) {
+                return Carbon::parse($productVariable->created_at)->toDateString();
             })
-            ->addColumn('actions', function ($productvariable) {
-                return $productvariable->action_buttons;
+            ->addColumn('actions', function ($productVariable) {
+                return $productVariable->action_buttons;
             })
             ->make(true);
     }

@@ -113,6 +113,12 @@ Route::group(['namespace' => 'productvariable'], function () {
     //For Datatable
     Route::post('productvariables/get', 'ProductvariablesTableController')->name('productvariables.get');
 });
+
+Route::group(['namespace' => 'productVariable'], function () {
+    Route::resource('product-variables', 'ProductVariableController');
+    //For Datatable
+    Route::post('product-variables/get', 'ProductVariableTableController')->name('productVariable.get');
+});
 Route::group(['namespace' => 'purchaseorder'], function () {
     Route::resource('purchaseorders', 'PurchaseordersController');
     //For Datatable

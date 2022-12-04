@@ -21,7 +21,7 @@
                     <div class="media width-250 float-right">
 
                         <div class="media-body media-right text-right">
-                            @include('focus.productvariables.partials.productvariables-header-buttons')
+                            @include('focus.productVariables.partials.product-variables-header-buttons')
                         </div>
                     </div>
                 </div>
@@ -34,14 +34,14 @@
                             <div class="card-content">
 
                                 <div class="card-body">
-                                    {{ Form::open(['route' => 'biller.productvariables.store', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post', 'id' => 'create-productvariable']) }}
+                                    {{ Form::open(['route' => 'biller.product-variables.store', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post', 'id' => 'create-productVariable']) }}
 
 
                                     <div class="form-group">
                                         {{-- Including Form blade file --}}
-                                        @include("focus.productvariables.form")
+                                        @include("focus.productVariables.form")
                                         <div class="edit-form-btn">
-                                            {{ link_to_route('biller.productvariables.index', trans('buttons.general.cancel'), [], ['class' => 'btn btn-danger btn-md']) }}
+                                            {{ link_to_route('biller.product-variables.index', trans('buttons.general.cancel'), [], ['class' => 'btn btn-danger btn-md']) }}
                                             {{ Form::submit(trans('buttons.general.crud.create'), ['class' => 'btn btn-primary btn-md']) }}
                                             <div class="clearfix"></div>
                                         </div><!--edit-form-btn-->

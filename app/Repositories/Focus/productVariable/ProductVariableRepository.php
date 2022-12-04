@@ -1,23 +1,21 @@
 <?php
 
-namespace App\Repositories\Focus\productvariable;
+namespace App\Repositories\Focus\productVariable;
 
 use DB;
-use Carbon\Carbon;
-use App\Models\productvariable\Productvariable;
+use App\Models\productVariable\ProductVariable;
 use App\Exceptions\GeneralException;
 use App\Repositories\BaseRepository;
-use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class ProductvariableRepository.
+ * Class ProductVariableRepository.
  */
-class ProductvariableRepository extends BaseRepository
+class ProductVariableRepository extends BaseRepository
 {
     /**
      * Associated Repository Model.
      */
-    const MODEL = Productvariable::class;
+    const MODEL = ProductVariable::class;
 
     /**
      * This method is used by Table Controller
@@ -42,42 +40,42 @@ class ProductvariableRepository extends BaseRepository
     public function create(array $input)
     {
         $input = array_map( 'strip_tags', $input);
-        if (Productvariable::create($input)) {
-            return true;
+        if ($productVariable = ProductVariable::create($input)) {
+            return $productVariable;
         }
-        throw new GeneralException(trans('exceptions.backend.productvariables.create_error'));
+        throw new GeneralException(trans('exceptions.backend.productVariables.create_error'));
     }
 
     /**
      * For updating the respective Model in storage
      *
-     * @param Productvariable $productvariable
+     * @param ProductVariable $productVariable
      * @param  $input
      * @throws GeneralException
      * return bool
      */
-    public function update(Productvariable $productvariable, array $input)
+    public function update(ProductVariable $productVariable, array $input)
     {
         $input = array_map( 'strip_tags', $input);
-    	if ($productvariable->update($input))
+    	if ($productVariable->update($input))
             return true;
 
-        throw new GeneralException(trans('exceptions.backend.productvariables.update_error'));
+        throw new GeneralException(trans('exceptions.backend.productVariables.update_error'));
     }
 
     /**
      * For deleting the respective model from storage
      *
-     * @param Productvariable $productvariable
+     * @param ProductVariable $productVariable
      * @throws GeneralException
      * @return bool
      */
-    public function delete(Productvariable $productvariable)
+    public function delete(ProductVariable $productVariable)
     {
-        if ($productvariable->delete()) {
+        if ($productVariable->delete()) {
             return true;
         }
 
-        throw new GeneralException(trans('exceptions.backend.productvariables.delete_error'));
+        throw new GeneralException(trans('exceptions.backend.productVariables.delete_error'));
     }
 }
