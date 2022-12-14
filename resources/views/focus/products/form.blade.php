@@ -147,7 +147,21 @@
             </div>
         </div>
     </div>
- 
+    <div class="col-md-4">
+        <div class="form-group">
+            {{ Form::label( 'unit', trans('products.unit'),['class' => 'col control-label']) }}
+            <div class='col'>
+                <select class="form-control" name="unit">
+                    @foreach($product_variable as $item)
+                        @if(!$item->type)
+                            <option value="{{$item->code}}" {{ $item->code === @$products->unit ? " selected" : "" }}>{{$item->name}}
+                                - {{$item->code}}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
+        </div>
+    </div>
 </div>
 
 

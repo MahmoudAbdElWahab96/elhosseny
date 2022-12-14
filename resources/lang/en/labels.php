@@ -22,6 +22,9 @@ return [
     'sales_channel' => [
         'view' => 'Sales Channel View'
     ],
+    'productVariables' => [
+        'create' => 'create Product Variables'
+    ],
     'access' => [
       'roles' =>
       [

@@ -27,6 +27,9 @@ return [
         'openingBalance' => [
             'create' => 'انشاء ارصده افتتاحيه'
         ],
+        'productVariables' => [
+            'create' => 'انشاء متغيرات المنتج'
+        ],
         'sales_channel' => [
             'view' => 'عرض قناه السوق'
         ],

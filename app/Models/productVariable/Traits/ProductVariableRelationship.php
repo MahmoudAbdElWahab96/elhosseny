@@ -14,7 +14,7 @@ trait ProductVariableRelationship
 
     public function variationValues() {
 
-        return $this->hasMany('App\Models\productVariableValues\ProductVariableValues', 'product_variable_id', 'id');
+        return $this->hasMany('App\Models\productvariableValues\ProductvariableValues', 'product_variable_id', 'id');
     }
 
 }

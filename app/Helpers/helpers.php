@@ -4,10 +4,8 @@ use App\Helpers\uuid;
 use App\Models\Company\Branch;
 use App\Models\Company\ConfigMeta;
 use App\Models\hrm\Hrm;
-use App\Models\Notification\Notification;
 use App\Models\product\Product;
 use App\Models\product\ProductVariation;
-use App\Models\productvariable\Productvariable;
 use App\Models\Settings\Setting;
 use App\Models\settings\SettingsRequiredFields;
 use App\Models\tag\Tag;
@@ -614,7 +612,8 @@ function bill_helper($term = 1, $module_id = 1)
 
 function product_helper()
 {
-    $productVariation=ProductVariation::with('product')->where('warehouse_id',config('constants.warehouse_contains_id'))->get();
+    $productVariables = \App\Models\productVariable\ProductVariable::with('variationValues')->get();
+    $productVariation = ProductVariation::with('product')->where('warehouse_id',config('constants.warehouse_contains_id'))->get();
     $warehouses = \App\Models\warehouse\Warehouse::all();
     $product_category = \App\Models\productcategory\Productcategory::all();
     $product_variable = \App\Models\productvariable\Productvariable::all();
@@ -623,8 +622,7 @@ function product_helper()
     $product_gs_code = SettingsRequiredFields::where('model_type', Product::class)->where('field', 'gs_code')->select(['is_require'])->first();
     $product_egs_code = SettingsRequiredFields::where('model_type', Product::class)->where('field', 'egs_code')->select(['is_require'])->first();
     $product_name = SettingsRequiredFields::where('model_type', Product::class)->where('field', 'name')->select(['is_require'])->first();
-    $productVariables = Productvariable::with('variationValues')->get();
-
+    // dd($productVariables);
     return compact('productVariables','product_code','product_gs_code','product_egs_code','product_name','warehouses', 'product_category', 'product_variable', 'fields', 'productVariation');
 }
 

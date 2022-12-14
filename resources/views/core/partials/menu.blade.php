@@ -709,6 +709,11 @@
                                                 class="fa fa-plus-circle"></i> {{ trans('labels.backend.products.create') }}
                                     </a>
                                 </li>
+                                <li><a class="dropdown-item" href="{{ route( 'biller.product-variables.create' ) }}"
+                                        data-toggle="dropdown"> <i
+                                                class="fa fa-plus-circle"></i> {{ trans('labels.backend.productVariables.create') }}
+                                    </a>
+                                </li>
                                 @endauth
                             </ul>
                         </li>

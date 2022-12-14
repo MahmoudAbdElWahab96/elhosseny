@@ -103,7 +103,7 @@ class ProductsController extends Controller
     public function store(CreateProductRequest $request)
     {
         //Input received from the request
-        $input['main'] = $request->only(['name', 'type', 'price', 'taxrate', 'product_des', 'productcategory_id', 'sub_cat_id']);
+        $input['main'] = $request->only(['name', 'type', 'price', 'taxrate', 'product_des', 'productcategory_id', 'unit', 'sub_cat_id']);
         $input['variation'] = $request->only(['v_id', 'price', 'purchase_price', 'qty', 'code', 'barcode', 'disrate', 'alert', 'expiry', 'warehouse_id', 'variation_name', 'image']);
         $input['main']['ins'] = auth()->user()->ins;
         $input['variables'] = $request->only('product_variable_value_id');
